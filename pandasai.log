@@ -2359,3 +2359,1797 @@ plt.close('all')
 ```
 2023-08-09 08:53:40 [INFO] Answer: None
 2023-08-09 08:53:40 [INFO] Executed in: 40.38051986694336s
+2023-08-09 14:40:28 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ
+#条件       
+ - ７月の金額の合計        
+- 2021年10月1日から2022年9月30日までを79期とします。
+- 2022年10月1日から2023年9月30日までを80期とします。        -
+- グラフは79期と80期を分ける
+2023-08-09 14:40:28 [INFO] Running PandasAI with openai LLM...
+2023-08-09 14:40:28 [INFO] Prompt ID: 7ffd9898-ae9f-4518-89c0-6970f774f9af
+2023-08-09 14:40:39 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the data for the specified period
+start_date = pd.to_datetime('2021-10-01')
+end_date = pd.to_datetime('2022-09-30')
+filtered_df = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+
+# Group the data by month and calculate the total amount for each month
+monthly_total = filtered_df.groupby(filtered_df['受注日'].dt.month)['金額'].sum()
+
+# Plot the bar graph
+plt.bar(monthly_total.index, monthly_total.values)
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount per Month in 79期')
+plt.show()
+
+# Filter the data for the next period
+start_date = pd.to_datetime('2022-10-01')
+end_date = pd.to_datetime('2023-09-30')
+filtered_df = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+
+# Group the data by month and calculate the total amount for each month
+monthly_total = filtered_df.groupby(filtered_df['受注日'].dt.month)['金額'].sum()
+
+# Plot the bar graph
+plt.bar(monthly_total.index, monthly_total.values)
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount per Month in 80期')
+plt.show()
+                        ```
+                    
+2023-08-09 14:40:39 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+start_date = pd.to_datetime('2021-10-01')
+end_date = pd.to_datetime('2022-09-30')
+filtered_df = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+monthly_total = filtered_df.groupby(filtered_df['受注日'].dt.month)['金額'].sum()
+plt.bar(monthly_total.index, monthly_total.values)
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount per Month in 79期')
+plt.show()
+plt.close('all')
+start_date = pd.to_datetime('2022-10-01')
+end_date = pd.to_datetime('2023-09-30')
+filtered_df = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+monthly_total = filtered_df.groupby(filtered_df['受注日'].dt.month)['金額'].sum()
+plt.bar(monthly_total.index, monthly_total.values)
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount per Month in 80期')
+plt.show()
+plt.close('all')
+```
+2023-08-09 14:40:54 [INFO] Answer: None
+2023-08-09 14:40:54 [INFO] Executed in: 26.589292764663696s
+2023-08-09 14:42:18 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ
+#条件       
+ - 金額の合計        
+- 2021年10月1日から2022年9月30日までを79期とします。
+- 2022年10月1日から2023年9月30日までを80期とします。        -
+- グラフは79期と80期を並べて表示
+2023-08-09 14:42:18 [INFO] Running PandasAI with openai LLM...
+2023-08-09 14:42:18 [INFO] Prompt ID: 2513f68b-5cfa-40b5-84f8-e977e948e5c3
+2023-08-09 14:42:28 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the data for the specified period
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Calculate the total amount for each period
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+
+# Create a bar plot
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('79期と80期の金額の合計')
+plt.show()
+                        ```
+                    
+2023-08-09 14:42:28 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('79期と80期の金額の合計')
+plt.show()
+plt.close('all')
+```
+2023-08-09 14:42:33 [INFO] Answer: None
+2023-08-09 14:42:33 [INFO] Executed in: 15.425657033920288s
+2023-08-09 14:45:27 [INFO] Question: 下記の条件を考慮して表示してください。#表示内容は棒グラフ#条件        - ７月の金額の合計        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。        - 金額の上位10件を表示- グラフは79期と80期を分ける
+2023-08-09 14:45:27 [INFO] Running PandasAI with openai LLM...
+2023-08-09 14:45:27 [INFO] Prompt ID: c218cb52-7c1d-4710-b4a5-013aa5e4abf6
+2023-08-09 14:45:36 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Filter the dataframe for the specified date range
+start_date = '2021-10-01'
+end_date = '2023-09-30'
+filtered_df = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+
+# Group the data by period and calculate the total amount for each period
+grouped_df = filtered_df.groupby('受注月')['金額'].sum().reset_index()
+
+# Sort the data in descending order and select the top 10 records
+top_10_df = grouped_df.sort_values('金額', ascending=False).head(10)
+
+# Separate the data for 79期 and 80期
+period_79_df = top_10_df[top_10_df['受注月'] < 10]
+period_80_df = top_10_df[top_10_df['受注月'] >= 10]
+
+# Plot the bar graph for 79期
+plt.figure(figsize=(10, 6))
+plt.bar(period_79_df['受注月'], period_79_df['金額'])
+plt.xlabel('受注月')
+plt.ylabel('金額')
+plt.title('79期の金額の合計')
+plt.show()
+
+# Plot the bar graph for 80期
+plt.figure(figsize=(10, 6))
+plt.bar(period_80_df['受注月'], period_80_df['金額'])
+plt.xlabel('受注月')
+plt.ylabel('金額')
+plt.title('80期の金額の合計')
+plt.show()
+                        ```
+                    
+2023-08-09 14:45:36 [INFO] 
+Code running:
+```
+start_date = '2021-10-01'
+end_date = '2023-09-30'
+filtered_df = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+grouped_df = filtered_df.groupby('受注月')['金額'].sum().reset_index()
+top_10_df = grouped_df.sort_values('金額', ascending=False).head(10)
+period_79_df = top_10_df[top_10_df['受注月'] < 10]
+period_80_df = top_10_df[top_10_df['受注月'] >= 10]
+plt.figure(figsize=(10, 6))
+plt.bar(period_79_df['受注月'], period_79_df['金額'])
+plt.xlabel('受注月')
+plt.ylabel('金額')
+plt.title('79期の金額の合計')
+plt.show()
+plt.close('all')
+plt.figure(figsize=(10, 6))
+plt.bar(period_80_df['受注月'], period_80_df['金額'])
+plt.xlabel('受注月')
+plt.ylabel('金額')
+plt.title('80期の金額の合計')
+plt.show()
+plt.close('all')
+```
+2023-08-09 14:45:37 [INFO] Answer: None
+2023-08-09 14:45:37 [INFO] Executed in: 9.765690565109253s
+2023-08-09 14:53:44 [INFO] Question: 下記の条件を考慮して表示してください。#表示内容は棒グラフ#条件        - ７月の金額の合計        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。        - 金額の上位10件を表示- グラフは79期と80期を分ける
+2023-08-09 14:53:44 [INFO] Running PandasAI with openai LLM...
+2023-08-09 14:53:44 [INFO] Prompt ID: ba59aae2-d1dd-47ea-b67e-5fcd0bec9e23
+2023-08-09 14:53:44 [INFO] Using cached response
+2023-08-09 14:53:44 [INFO] 
+Code running:
+```
+start_date = '2021-10-01'
+end_date = '2023-09-30'
+filtered_df = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+grouped_df = filtered_df.groupby('受注月')['金額'].sum().reset_index()
+top_10_df = grouped_df.sort_values('金額', ascending=False).head(10)
+period_79_df = top_10_df[top_10_df['受注月'] < 10]
+period_80_df = top_10_df[top_10_df['受注月'] >= 10]
+plt.figure(figsize=(10, 6))
+plt.bar(period_79_df['受注月'], period_79_df['金額'])
+plt.xlabel('受注月')
+plt.ylabel('金額')
+plt.title('79期の金額の合計')
+plt.show()
+plt.close('all')
+plt.figure(figsize=(10, 6))
+plt.bar(period_80_df['受注月'], period_80_df['金額'])
+plt.xlabel('受注月')
+plt.ylabel('金額')
+plt.title('80期の金額の合計')
+plt.show()
+plt.close('all')
+```
+2023-08-09 14:53:44 [INFO] Answer: None
+2023-08-09 14:53:44 [INFO] Executed in: 0.05700039863586426s
+2023-08-09 14:54:54 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ
+#条件        
+- 金額の合計       
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 14:54:54 [INFO] Running PandasAI with openai LLM...
+2023-08-09 14:54:54 [INFO] Prompt ID: 8e44d52f-df79-4734-be01-e02c3c88dcbe
+2023-08-09 14:55:02 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the data for the specified periods
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Calculate the total amount for each period
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+
+# Create a bar plot
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('79期と80期の金額の合計')
+plt.show()
+                        ```
+                    
+2023-08-09 14:55:02 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('79期と80期の金額の合計')
+plt.show()
+plt.close('all')
+```
+2023-08-09 14:55:02 [INFO] Answer: None
+2023-08-09 14:55:02 [INFO] Executed in: 8.46304726600647s
+2023-08-09 14:56:40 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ
+#条件        
+- 金額の合計       
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+- steamlit.pyplot(fig)で表示
+2023-08-09 14:56:40 [INFO] Running PandasAI with openai LLM...
+2023-08-09 14:56:40 [INFO] Prompt ID: 97757664-4d83-499f-8984-45fd149a2ada
+2023-08-09 14:56:51 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified date range
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Calculate the total amount for each period
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 14:56:51 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+st.pyplot(fig)
+```
+2023-08-09 14:56:51 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 14:56:51 [INFO] Executed in: 11.49670672416687s
+2023-08-09 15:00:12 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ
+#streamlit用のコードでグラフを作成してください
+#条件        
+- 金額の合計       
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+
+- steamlit.pyplot(fig)で表示
+2023-08-09 15:00:12 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:00:12 [INFO] Prompt ID: 59ce0c6b-1fd8-4737-831b-aef70c2bd26a
+2023-08-09 15:00:23 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the dataframe for the specified date range
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Calculate the total amount for each period
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('受注期ごとの金額の合計')
+
+# Display the plot using streamlit.pyplot
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:00:23 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('受注期ごとの金額の合計')
+st.pyplot(fig)
+```
+2023-08-09 15:00:23 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:00:23 [INFO] Executed in: 11.149243354797363s
+2023-08-09 15:01:11 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ
+#streamlit用のコードでグラフを作成してください
+#条件        
+- 金額の合計       
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+
+2023-08-09 15:01:11 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:01:11 [INFO] Prompt ID: 0676f078-26f5-485b-851a-afeac363246d
+2023-08-09 15:01:21 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified periods
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Calculate the total amount for each period
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+
+# Create a bar plot
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('受注日別の金額の合計')
+
+# Display the plot using Streamlit
+st.pyplot(plt)
+                        ```
+                    
+2023-08-09 15:01:21 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('受注日別の金額の合計')
+st.pyplot(plt)
+```
+2023-08-09 15:01:21 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:01:21 [INFO] Executed in: 9.972328662872314s
+2023-08-09 15:08:08 [INFO] Question: 下記の条件を考慮して表示してください。#表示内容は棒グラフ        #streamlit用のコードでグラフを作成してください#条件        - ７月の金額の合計        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。        - 金額の上位10件を表示- グラフは79期と80期を分ける
+2023-08-09 15:08:08 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:08:08 [INFO] Prompt ID: 22708610-2ece-4c34-82f1-2fa2ca36fbd4
+2023-08-09 15:08:22 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the dataframe for the specified date range
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Group by month and calculate the total amount for each month in 79期
+monthly_total_79 = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+
+# Group by month and calculate the total amount for each month in 80期
+monthly_total_80 = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+
+# Get the top 10 records based on amount
+top_10_records = df.nlargest(10, '金額')
+
+# Plot the bar graph for 79期 and 80期
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_total_79.index, monthly_total_79.values, label='79期')
+plt.bar(monthly_total_80.index, monthly_total_80.values, label='80期')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount by Month')
+plt.legend()
+plt.show()
+                        ```
+                    
+2023-08-09 15:08:22 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+monthly_total_79 = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+monthly_total_80 = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+top_10_records = df.nlargest(10, '金額')
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_total_79.index, monthly_total_79.values, label='79期')
+plt.bar(monthly_total_80.index, monthly_total_80.values, label='80期')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount by Month')
+plt.legend()
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:08:22 [INFO] Answer: None
+2023-08-09 15:08:22 [INFO] Executed in: 13.427165508270264s
+2023-08-09 15:10:15 [INFO] Question: 下記の条件を考慮して表示してください。#表示内容は棒グラフ        #streamlit用のコードでグラフを作成してください#条件        - ７月の金額の合計        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。        - 金額の上位10件を表示- グラフは79期と80期を分ける
+2023-08-09 15:10:15 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:10:15 [INFO] Prompt ID: 268cb3e2-f82a-4c1a-8347-04371baef511
+2023-08-09 15:10:15 [INFO] Using cached response
+2023-08-09 15:10:15 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+monthly_total_79 = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+monthly_total_80 = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+top_10_records = df.nlargest(10, '金額')
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_total_79.index, monthly_total_79.values, label='79期')
+plt.bar(monthly_total_80.index, monthly_total_80.values, label='80期')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount by Month')
+plt.legend()
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:10:15 [INFO] Answer: None
+2023-08-09 15:10:15 [INFO] Executed in: 0.06735348701477051s
+2023-08-09 15:13:18 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ       
+ #streamlit用のコードでグラフを作成してください
+#条件        
+- ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:13:18 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:13:18 [INFO] Prompt ID: 725da6d8-8af4-4736-a62f-e4b87251f028
+2023-08-09 15:13:30 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified date range
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Group the data by month and calculate the sum of '金額'
+monthly_sum_79 = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+monthly_sum_80 = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(monthly_sum_79.index, monthly_sum_79.values, label='79期')
+ax.bar(monthly_sum_80.index, monthly_sum_80.values, label='80期')
+ax.set_xlabel('月')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の月別金額の合計')
+ax.legend()
+
+# Display the plot using Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:13:30 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+monthly_sum_79 = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+monthly_sum_80 = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(monthly_sum_79.index, monthly_sum_79.values, label='79期')
+ax.bar(monthly_sum_80.index, monthly_sum_80.values, label='80期')
+ax.set_xlabel('月')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の月別金額の合計')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-09 15:13:31 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:13:31 [INFO] Executed in: 12.9761381149292s
+2023-08-09 15:14:35 [INFO] Question: 下記の条件を考慮して表示してください。
+#棒グラフを一つ表示       
+ #streamlit用のコードでグラフを作成してください
+#条件        
+- ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:14:35 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:14:35 [INFO] Prompt ID: 5668dbc6-0f61-4fc8-a327-60ea94fef9a2
+2023-08-09 15:14:43 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Filter the dataframe for orders in July
+july_orders = df[df['受注月'] == 7]
+
+# Group the orders by period and calculate the total amount
+period_79 = july_orders[(july_orders['受注日'] >= '2021-10-01') & (july_orders['受注日'] <= '2022-09-30')]
+period_80 = july_orders[(july_orders['受注日'] >= '2022-10-01') & (july_orders['受注日'] <= '2023-09-30')]
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+
+# Create a bar plot
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('７月の金額の合計')
+plt.show()
+                        ```
+                    
+2023-08-09 15:14:43 [INFO] 
+Code running:
+```
+july_orders = df[df['受注月'] == 7]
+period_79 = july_orders[(july_orders['受注日'] >= '2021-10-01') & (july_orders['受注日'] <= '2022-09-30')]
+period_80 = july_orders[(july_orders['受注日'] >= '2022-10-01') & (july_orders['受注日'] <= '2023-09-30')]
+total_amount_79 = period_79['金額'].sum()
+total_amount_80 = period_80['金額'].sum()
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('７月の金額の合計')
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:14:43 [INFO] Answer: None
+2023-08-09 15:14:43 [INFO] Executed in: 8.038564443588257s
+2023-08-09 15:15:08 [INFO] Question: 下記の条件を考慮して表示してください。
+#棒グラフ
+ #streamlit用のコードでグラフを作成してください
+#条件        
+- ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:15:08 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:15:08 [INFO] Prompt ID: 84991a13-3000-475b-8124-d3d87937fba3
+2023-08-09 15:15:18 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified date range
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Calculate the total amount for each period
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+
+# Display the plot using Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:15:18 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+st.pyplot(fig)
+```
+2023-08-09 15:15:19 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:15:19 [INFO] Executed in: 10.541640758514404s
+2023-08-09 15:16:27 [INFO] Question: 下記の条件を考慮して表示してください。
+#棒グラフ
+ #streamlit用のコードでグラフを作成してください
+# グラフ作成にStreamlit command以外は使わない。
+#条件        
+- ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:16:27 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:16:27 [INFO] Prompt ID: 5292e5fb-aca0-44bc-b5c8-e1803dd86b03
+2023-08-09 15:16:38 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified date range
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Calculate the total amount for each period
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+
+# Display the plot using Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:16:38 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+st.pyplot(fig)
+```
+2023-08-09 15:16:38 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:16:38 [INFO] Executed in: 11.242859125137329s
+2023-08-09 15:19:50 [INFO] Question: 下記の条件を考慮して表示してください。
+#棒グラフ
+ #streamlit用のコードでグラフを作成してください
+# グラフ作成にStreamlit command以外は使わない。
+#条件        
+- ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:19:50 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:19:50 [INFO] Prompt ID: e540530c-946f-4b96-931d-169dbef08919
+2023-08-09 15:19:50 [INFO] Using cached response
+2023-08-09 15:19:50 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+st.pyplot(fig)
+```
+2023-08-09 15:19:51 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:19:51 [INFO] Executed in: 0.454937219619751s
+2023-08-09 15:20:52 [INFO] Question: 下記の条件を考慮して表示してください。
+#棒グラフ
+ #streamlit用のコードでグラフを作成してください
+# グラフ作成にStreamlit command以外は使わない。
+#条件        
+- ７月の金額の合計    
+- 得意先名にオツタカを含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:20:52 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:20:52 [INFO] Prompt ID: 24255195-f9ef-42c6-9cd2-a4de7a6fab0a
+2023-08-09 15:21:04 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the data for the specified date range and customer name
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79) & (df['得意先名'].str.contains('オツタカ'))]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80) & (df['得意先名'].str.contains('オツタカ'))]
+
+# Calculate the total amount for each period
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+
+# Create a bar chart using Streamlit
+st.bar_chart({'79期': total_amount_79, '80期': total_amount_80})
+                        ```
+                    
+2023-08-09 15:21:04 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79) & df['得意先名'].str.contains('オツタカ')]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80) & df['得意先名'].str.contains('オツタカ')]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+st.bar_chart({'79期': total_amount_79, '80期': total_amount_80})
+```
+2023-08-09 15:21:05 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'arrow_bar_chart', 'last_index': '80期'}), _parent=DeltaGenerator())
+2023-08-09 15:21:05 [INFO] Executed in: 12.794413805007935s
+2023-08-09 15:22:15 [INFO] Question: 下記の条件を考慮して表示してください。
+#棒グラフ
+ #streamlit用のコードのみでグラフを作成してください
+# グラフ作成に_repr_html_()は使わない。
+#条件        
+- ７月の金額の合計    
+- 得意先名にオツタカを含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:22:15 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:22:15 [INFO] Prompt ID: 6ee2a8e7-a665-4f99-b3f9-507d6b897210
+2023-08-09 15:22:25 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe for orders in July
+df_july = df[df['受注月'] == 7]
+
+# Filter the dataframe for customers containing 'オツタカ' in their name
+df_otsutaka = df[df['得意先名'].str.contains('オツタカ')]
+
+# Filter the dataframe for orders in period 79
+df_period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+
+# Filter the dataframe for orders in period 80
+df_period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Calculate the total amount for each period
+total_amount_79 = df_period_79['金額'].sum()
+total_amount_80 = df_period_80['金額'].sum()
+
+# Create a bar plot for the total amount in each period
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+
+# Display the bar plot using Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:22:25 [INFO] 
+Code running:
+```
+df_july = df[df['受注月'] == 7]
+df_otsutaka = df[df['得意先名'].str.contains('オツタカ')]
+df_period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+df_period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+total_amount_79 = df_period_79['金額'].sum()
+total_amount_80 = df_period_80['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('期')
+ax.set_ylabel('金額の合計')
+ax.set_title('79期と80期の金額の合計')
+st.pyplot(fig)
+```
+2023-08-09 15:22:25 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:22:25 [INFO] Executed in: 10.51965618133545s
+2023-08-09 15:25:13 [INFO] Question: 下記の条件を考慮して表示してください。#表示内容は折れ線グラフ        #streamlit用のコードでグラフを作成してください#条件-         - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。        得意先名は「オツタカ」を含んだ名称- 月毎の金額の合計- グラフは79期と80期を分ける
+2023-08-09 15:25:13 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:25:13 [INFO] Prompt ID: dc68c1fa-726b-48e4-a5a5-b5b1b0694cf1
+2023-08-09 15:25:26 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the data for the specified periods
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Filter the data for the specified customer name
+customer_name = 'オツタカ'
+period_79_customer = period_79[period_79['得意先名'].str.contains(customer_name)]
+period_80_customer = period_80[period_80['得意先名'].str.contains(customer_name)]
+
+# Group the data by month and calculate the total amount
+period_79_monthly_total = period_79_customer.groupby(period_79_customer['受注日'].dt.month)['金額'].sum()
+period_80_monthly_total = period_80_customer.groupby(period_80_customer['受注日'].dt.month)['金額'].sum()
+
+# Plot the line graph
+plt.plot(period_79_monthly_total.index, period_79_monthly_total.values, label='Period 79')
+plt.plot(period_80_monthly_total.index, period_80_monthly_total.values, label='Period 80')
+
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer: {}'.format(customer_name))
+plt.legend()
+
+plt.show()
+                        ```
+                    
+2023-08-09 15:25:26 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+customer_name = 'オツタカ'
+period_79_customer = period_79[period_79['得意先名'].str.contains(customer_name)]
+period_80_customer = period_80[period_80['得意先名'].str.contains(customer_name)]
+period_79_monthly_total = period_79_customer.groupby(period_79_customer['受注日'].dt.month)['金額'].sum()
+period_80_monthly_total = period_80_customer.groupby(period_80_customer['受注日'].dt.month)['金額'].sum()
+plt.plot(period_79_monthly_total.index, period_79_monthly_total.values, label='Period 79')
+plt.plot(period_80_monthly_total.index, period_80_monthly_total.values, label='Period 80')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer: {}'.format(customer_name))
+plt.legend()
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:25:26 [INFO] Answer: None
+2023-08-09 15:25:26 [INFO] Executed in: 13.428092956542969s
+2023-08-09 15:26:30 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ       
+ #streamlit用のコードでグラフを作成してください
+#条件-        
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+-  得意先名は「オツタカ」を含んだ名称
+ 月毎の金額の合計
+- グラフは79期と80期を分ける
+2023-08-09 15:26:30 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:26:30 [INFO] Prompt ID: c4f4ca60-0016-4692-ac44-8d009083f925
+2023-08-09 15:26:42 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the data for the specified periods and customer name
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+customer_name = df['得意先名'].str.contains('オツタカ')
+
+# Apply the filters and group by month and sum the amounts
+period_79_data = df.loc[period_79 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+period_80_data = df.loc[period_80 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+
+# Create the line plot
+plt.plot(period_79_data.index, period_79_data.values, label='Period 79')
+plt.plot(period_80_data.index, period_80_data.values, label='Period 80')
+
+# Add labels and title
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer "オツタカ"')
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.show()
+                        ```
+                    
+2023-08-09 15:26:42 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+customer_name = df['得意先名'].str.contains('オツタカ')
+period_79_data = df.loc[period_79 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+period_80_data = df.loc[period_80 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+plt.plot(period_79_data.index, period_79_data.values, label='Period 79')
+plt.plot(period_80_data.index, period_80_data.values, label='Period 80')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer "オツタカ"')
+plt.legend()
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:26:42 [WARNING] Error executing code (count: 0)
+2023-08-09 15:27:55 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ       
+ #streamlit用のコードでグラフを作成してください
+#条件-        
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+-  得意先名は「オツタカ」を含む
+- 月毎の金額の合計
+2023-08-09 15:27:55 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:27:55 [INFO] Prompt ID: 6f8b5e26-ae67-4605-a2f7-77a424556e66
+2023-08-09 15:28:06 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the data for the specified periods and customer name
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+customer_name = df['得意先名'].str.contains('オツタカ')
+
+# Apply the filters and group by month to calculate the total amount
+period_79_data = df.loc[period_79 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+period_80_data = df.loc[period_80 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+
+# Create a line plot
+plt.plot(period_79_data.index, period_79_data.values, label='Period 79')
+plt.plot(period_80_data.index, period_80_data.values, label='Period 80')
+
+# Add labels and title
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer "オツタカ"')
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.show()
+                        ```
+                    
+2023-08-09 15:28:06 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+customer_name = df['得意先名'].str.contains('オツタカ')
+period_79_data = df.loc[period_79 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+period_80_data = df.loc[period_80 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+plt.plot(period_79_data.index, period_79_data.values, label='Period 79')
+plt.plot(period_80_data.index, period_80_data.values, label='Period 80')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer "オツタカ"')
+plt.legend()
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:28:06 [WARNING] Error executing code (count: 0)
+2023-08-09 15:29:28 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ       
+ #streamlit用のコードでグラフを作成してください
+#条件-        
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+-  得意先名は「オツタカ」を含む
+- 月毎の金額の合計
+-グラフのy軸は金額の合計、x軸は月
+2023-08-09 15:29:28 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:29:28 [INFO] Prompt ID: 3f06ba74-bf40-4443-8ecb-10b42f658621
+2023-08-09 15:29:40 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the data for the specified periods and customer name
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+customer_name = df['得意先名'].str.contains('オツタカ')
+
+# Apply the filters and group by month to calculate the total amount
+period_79_data = df.loc[period_79 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+period_80_data = df.loc[period_80 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+
+# Create the line plot
+plt.plot(period_79_data.index, period_79_data.values, label='Period 79')
+plt.plot(period_80_data.index, period_80_data.values, label='Period 80')
+
+# Set the x-axis and y-axis labels
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+
+# Set the title of the plot
+plt.title('Total Amount by Month')
+
+# Add a legend
+plt.legend()
+
+# Show the plot
+plt.show()
+                        ```
+                    
+2023-08-09 15:29:40 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+customer_name = df['得意先名'].str.contains('オツタカ')
+period_79_data = df.loc[period_79 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+period_80_data = df.loc[period_80 & customer_name].groupby(df['受注日'].dt.month)['金額'].sum()
+plt.plot(period_79_data.index, period_79_data.values, label='Period 79')
+plt.plot(period_80_data.index, period_80_data.values, label='Period 80')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Total Amount by Month')
+plt.legend()
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:29:40 [WARNING] Error executing code (count: 0)
+2023-08-09 15:30:41 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ       
+ #streamlit用のコードでグラフを作成してください
+#条件-        
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+-  得意先名は「オツタカ」を含む
+- 月毎の金額の合計
+2023-08-09 15:30:41 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:30:41 [INFO] Prompt ID: c22931f1-3d95-426c-b7ad-6e4e70105b73
+2023-08-09 15:30:48 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe based on the conditions
+filtered_df = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30') & (df['得意先名'].str.contains('オツタカ'))]
+
+# Group the data by month and calculate the sum of the 金額 column
+monthly_total = filtered_df.groupby(filtered_df['受注日'].dt.month)['金額'].sum()
+
+# Create a line plot
+plt.plot(monthly_total.index, monthly_total.values)
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Orders from "オツタカ"')
+plt.show()
+                        ```
+                    
+2023-08-09 15:30:48 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+filtered_df = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30') & df['得意先名'].str.contains('オツタカ')]
+monthly_total = filtered_df.groupby(filtered_df['受注日'].dt.month)['金額'].sum()
+plt.plot(monthly_total.index, monthly_total.values)
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Orders from "オツタカ"')
+plt.show()
+plt.close('all')
+```
+2023-08-09 15:30:48 [INFO] Answer: None
+2023-08-09 15:30:48 [INFO] Executed in: 7.5944154262542725s
+2023-08-09 15:32:10 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ        
+#streamlit用のコードでグラフを作成してください
+#条件       
+ - ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を並べて表示
+2023-08-09 15:32:10 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:32:10 [INFO] Prompt ID: b5cd6061-0da8-4fc9-81c0-176ebd654a4e
+2023-08-09 15:32:24 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified date range
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Calculate the total amount for each month in 79期
+monthly_total_79 = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+
+# Calculate the total amount for each month in 80期
+monthly_total_80 = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+
+# Create a bar plot for the monthly totals
+fig, ax = plt.subplots()
+ax.bar(monthly_total_79.index, monthly_total_79.values, label='79期')
+ax.bar(monthly_total_80.index, monthly_total_80.values, label='80期')
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+
+# Display the plot using Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:32:24 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+monthly_total_79 = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+monthly_total_80 = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(monthly_total_79.index, monthly_total_79.values, label='79期')
+ax.bar(monthly_total_80.index, monthly_total_80.values, label='80期')
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-09 15:32:24 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:32:24 [INFO] Executed in: 14.244160890579224s
+2023-08-09 15:32:56 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ        
+#streamlit用のコードでグラフを作成してください
+#条件       
+ - ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - グラフは79期と80期を横に並べて表示
+2023-08-09 15:32:56 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:32:56 [INFO] Prompt ID: ba4f87fa-0588-4014-97c5-8280003b43b1
+2023-08-09 15:33:13 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified date range
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+
+# Group the data by month and calculate the sum of '金額'
+df_79_monthly = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+df_80_monthly = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(df_79_monthly.index, df_79_monthly.values, label='79期')
+ax.bar(df_80_monthly.index, df_80_monthly.values, label='80期')
+
+# Set the x-axis labels
+ax.set_xticks(range(1, 13))
+ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+
+# Set the y-axis label
+ax.set_ylabel('Total Amount')
+
+# Set the title
+ax.set_title('Total Amount by Month')
+
+# Add a legend
+ax.legend()
+
+# Show the plot
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:33:13 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date_79 = pd.to_datetime('2021-10-01')
+end_date_79 = pd.to_datetime('2022-09-30')
+start_date_80 = pd.to_datetime('2022-10-01')
+end_date_80 = pd.to_datetime('2023-09-30')
+df_79 = df[(df['受注日'] >= start_date_79) & (df['受注日'] <= end_date_79)]
+df_80 = df[(df['受注日'] >= start_date_80) & (df['受注日'] <= end_date_80)]
+df_79_monthly = df_79.groupby(df_79['受注日'].dt.month)['金額'].sum()
+df_80_monthly = df_80.groupby(df_80['受注日'].dt.month)['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(df_79_monthly.index, df_79_monthly.values, label='79期')
+ax.bar(df_80_monthly.index, df_80_monthly.values, label='80期')
+ax.set_xticks(range(1, 13))
+ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-09 15:33:13 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:33:13 [INFO] Executed in: 17.277836561203003s
+2023-08-09 15:33:43 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ        
+#streamlit用のコードでグラフを作成してください
+#条件       
+ - ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+2023-08-09 15:33:43 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:33:43 [INFO] Prompt ID: a79d8980-f6cf-4fd4-9135-1b58e51d2bdc
+2023-08-09 15:33:51 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified period
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Calculate the total amount for July in each period
+total_amount_79 = period_79[period_79['受注月'] == 7]['金額'].sum()
+total_amount_80 = period_80[period_80['受注月'] == 7]['金額'].sum()
+
+# Create a bar plot
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('７月の金額の合計')
+plt.show()
+
+# Display the plot using Streamlit
+st.pyplot()
+                        ```
+                    
+2023-08-09 15:33:51 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+total_amount_79 = period_79[period_79['受注月'] == 7]['金額'].sum()
+total_amount_80 = period_80[period_80['受注月'] == 7]['金額'].sum()
+plt.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+plt.xlabel('期')
+plt.ylabel('金額の合計')
+plt.title('７月の金額の合計')
+plt.show()
+plt.close('all')
+st.pyplot()
+```
+2023-08-09 15:33:51 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=11, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:33:51 [INFO] Executed in: 8.019299030303955s
+2023-08-09 15:38:15 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ        
+#streamlit用のコードでグラフを作成してください
+#st.pyplot(fig)で表示してください
+#条件       
+ - ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+2023-08-09 15:38:15 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:38:15 [INFO] Prompt ID: 20436407-909a-40ae-bcfb-0519fba1c920
+2023-08-09 15:38:24 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Convert the '受注日' column to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the dataframe for the specified date range
+start_date = pd.to_datetime('2021-10-01')
+end_date = pd.to_datetime('2022-09-30')
+df_79 = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+
+# Calculate the total amount for July
+july_total = df_79[df_79['受注月'] == 7]['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar('79期', july_total)
+
+# Set the plot title and labels
+ax.set_title('Total Amount for July in 79期')
+ax.set_xlabel('Period')
+ax.set_ylabel('Total Amount')
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:38:24 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+start_date = pd.to_datetime('2021-10-01')
+end_date = pd.to_datetime('2022-09-30')
+df_79 = df[(df['受注日'] >= start_date) & (df['受注日'] <= end_date)]
+july_total = df_79[df_79['受注月'] == 7]['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar('79期', july_total)
+ax.set_title('Total Amount for July in 79期')
+ax.set_xlabel('Period')
+ax.set_ylabel('Total Amount')
+st.pyplot(fig)
+```
+2023-08-09 15:38:24 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:38:24 [INFO] Executed in: 8.887921571731567s
+2023-08-09 15:39:25 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ        
+#streamlit用のコードでグラフを作成してください
+#st.pyplot(fig)で表示してください
+#条件       
+ - ７月の金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+- 得意先名にオツタカを含む    
+2023-08-09 15:39:25 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:39:25 [INFO] Prompt ID: 367b9bd0-d4b2-4dcd-ba17-d4d21ad63656
+2023-08-09 15:39:33 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe for orders placed in July
+df_july = df[df['受注月'] == 7]
+
+# Group the data by period and calculate the total amount for each period
+df_79 = df_july[(df_july['受注日'] >= '2021-10-01') & (df_july['受注日'] <= '2022-09-30')]
+df_80 = df_july[(df_july['受注日'] >= '2022-10-01') & (df_july['受注日'] <= '2023-09-30')]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('Period')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount of Orders in July')
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:39:33 [INFO] 
+Code running:
+```
+df_july = df[df['受注月'] == 7]
+df_79 = df_july[(df_july['受注日'] >= '2021-10-01') & (df_july['受注日'] <= '2022-09-30')]
+df_80 = df_july[(df_july['受注日'] >= '2022-10-01') & (df_july['受注日'] <= '2023-09-30')]
+total_amount_79 = df_79['金額'].sum()
+total_amount_80 = df_80['金額'].sum()
+fig, ax = plt.subplots()
+ax.bar(['79期', '80期'], [total_amount_79, total_amount_80])
+ax.set_xlabel('Period')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount of Orders in July')
+st.pyplot(fig)
+```
+2023-08-09 15:39:34 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:39:34 [INFO] Executed in: 8.753175497055054s
+2023-08-09 15:40:49 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ        
+#streamlit用のコードでグラフを作成してください
+#st.pyplot(fig)で表示してください
+#条件       
+ - 金額の合計        
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+- 得意先名にオツタカを含む    
+2023-08-09 15:40:49 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:40:49 [INFO] Prompt ID: a3244660-0165-4593-ba73-8b27d99afb75
+2023-08-09 15:40:57 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the conditions
+df_filtered = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30') & (df['得意先名'].str.contains('オツタカ'))]
+
+# Group the filtered dataframe by period and calculate the sum of 金額
+df_grouped = df_filtered.groupby(pd.Grouper(key='受注日', freq='Y')).sum()['金額']
+
+# Plot the bar graph
+fig, ax = plt.subplots()
+df_grouped.plot(kind='bar', ax=ax)
+
+# Set the labels and title
+ax.set_xlabel('Period')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Period')
+
+# Display the plot in Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:40:57 [INFO] 
+Code running:
+```
+df_filtered = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30') & df['得意先名'].str.contains('オツタカ')]
+df_grouped = df_filtered.groupby(pd.Grouper(key='受注日', freq='Y')).sum()['金額']
+fig, ax = plt.subplots()
+df_grouped.plot(kind='bar', ax=ax)
+ax.set_xlabel('Period')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Period')
+st.pyplot(fig)
+```
+2023-08-09 15:40:58 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:40:58 [INFO] Executed in: 8.653165340423584s
+2023-08-09 15:43:52 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ       
+ #streamlit用のコードでグラフを作成してください
+#st.pyplot(fig)で表示してください#条件        
+- 得意先名にオツタカを含む
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+- ７月の金額の合計     
+
+2023-08-09 15:43:52 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:43:52 [INFO] Prompt ID: 4b33ca8a-af0e-4c52-9243-50432a14f51d
+2023-08-09 15:44:01 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the conditions
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+
+# Create a new column to represent the fiscal year
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the data by fiscal year and sum the amounts for July
+df_grouped = df_filtered[df_filtered['受注日'].dt.month == 7].groupby('Fiscal Year')['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+df_grouped.plot(kind='bar', ax=ax)
+ax.set_xlabel('Fiscal Year')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount for July by Fiscal Year')
+
+# Display the plot in Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:44:01 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_grouped = df_filtered[df_filtered['受注日'].dt.month == 7].groupby('Fiscal Year')['金額'].sum()
+fig, ax = plt.subplots()
+df_grouped.plot(kind='bar', ax=ax)
+ax.set_xlabel('Fiscal Year')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount for July by Fiscal Year')
+st.pyplot(fig)
+```
+2023-08-09 15:44:02 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:44:02 [INFO] Executed in: 9.472486734390259s
+2023-08-09 15:48:16 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ        
+#streamlit用のコードでグラフを作成してください
+#st.pyplot(fig)で表示してください
+#条件     
+- 得意先名は「オツタカ」を含む       
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。       
+ - 月毎の金額の合計
+2023-08-09 15:48:16 [INFO] Running PandasAI with openai LLM...
+2023-08-09 15:48:16 [INFO] Prompt ID: 8a158ba7-563f-40a8-a490-6664ba5d1c41
+2023-08-09 15:48:28 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the conditions
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+
+# Create a new column for the fiscal year
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the data by month and fiscal year, and calculate the sum of the amounts
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+
+# Create a line plot
+fig, ax = plt.subplots()
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-09 15:48:28 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+fig, ax = plt.subplots()
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-09 15:48:28 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-09 15:48:28 [INFO] Executed in: 12.162336349487305s
