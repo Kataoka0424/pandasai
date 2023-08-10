@@ -4153,3 +4153,793 @@ st.pyplot(fig)
 ```
 2023-08-09 15:48:28 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=9, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
 2023-08-09 15:48:28 [INFO] Executed in: 12.162336349487305s
+2023-08-10 08:52:36 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は表形式
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。
+-   79期と80期の営業担当者毎の金額の合計     
+2023-08-10 08:52:36 [INFO] Running PandasAI with openai LLM...
+2023-08-10 08:52:36 [INFO] Prompt ID: 4f2978f4-54d3-457e-8001-10b23ba6aebf
+2023-08-10 08:52:43 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the dataframe for the specified periods
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Group by '営業担当者名' and calculate the sum of '金額' for each period
+sum_79 = period_79.groupby('営業担当者名')['金額'].sum()
+sum_80 = period_80.groupby('営業担当者名')['金額'].sum()
+
+# Combine the sums into a single dataframe
+result = pd.concat([sum_79, sum_80], axis=1)
+result.columns = ['79期', '80期']
+
+result
+                        ```
+                    
+2023-08-10 08:52:43 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+sum_79 = period_79.groupby('営業担当者名')['金額'].sum()
+sum_80 = period_80.groupby('営業担当者名')['金額'].sum()
+result = pd.concat([sum_79, sum_80], axis=1)
+result.columns = ['79期', '80期']
+result
+```
+2023-08-10 08:52:43 [INFO] Answer:                 79期         80期
+営業担当者名                         
+伊勢 幸彦           0.0         NaN
+星川 和博    87028739.0  70070776.0
+渡辺 臣     91894563.0  62768227.0
+瀬野尾 真里子  27094878.0  23988662.0
+葛西 伸一    87561710.0  90554600.0
+菅原 椋            NaN         0.0
+2023-08-10 08:52:43 [INFO] Executed in: 7.460964918136597s
+2023-08-10 08:53:45 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は表形式
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。
+-   79期と80期の営業担当者毎の金額の合計  
+-   
+2023-08-10 08:53:45 [INFO] Running PandasAI with openai LLM...
+2023-08-10 08:53:45 [INFO] Prompt ID: e66b7e37-6975-4bb4-99f5-28a4d0ca99fc
+2023-08-10 08:53:53 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the dataframe for the specified date range
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Group by '営業担当者名' and calculate the sum of '金額' for each period
+period_79_total = period_79.groupby('営業担当者名')['金額'].sum()
+period_80_total = period_80.groupby('営業担当者名')['金額'].sum()
+
+# Display the results
+result = pd.concat([period_79_total, period_80_total], axis=1)
+result.columns = ['79期', '80期']
+result.fillna(0, inplace=True)
+result
+                        ```
+                    
+2023-08-10 08:53:53 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+period_79_total = period_79.groupby('営業担当者名')['金額'].sum()
+period_80_total = period_80.groupby('営業担当者名')['金額'].sum()
+result = pd.concat([period_79_total, period_80_total], axis=1)
+result.columns = ['79期', '80期']
+result.fillna(0, inplace=True)
+result
+```
+2023-08-10 08:53:53 [INFO] Answer:                 79期         80期
+営業担当者名                         
+伊勢 幸彦           0.0         0.0
+星川 和博    87028739.0  70070776.0
+渡辺 臣     91894563.0  62768227.0
+瀬野尾 真里子  27094878.0  23988662.0
+葛西 伸一    87561710.0  90554600.0
+菅原 椋            0.0         0.0
+2023-08-10 08:53:53 [INFO] Executed in: 7.651893138885498s
+2023-08-10 08:55:16 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は表形式
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。
+-   79期と80期の営業担当者毎の金額の合計  
+-対前年比の列を追加
+-   
+2023-08-10 08:55:16 [INFO] Running PandasAI with openai LLM...
+2023-08-10 08:55:16 [INFO] Prompt ID: 082d2420-e10a-4210-9988-39f83b7895f0
+2023-08-10 08:55:25 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+
+# Filter the dataframe for the specified date range
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+
+# Group by '営業担当者名' and calculate the sum of '金額' for each period
+period_79_total = period_79.groupby('営業担当者名')['金額'].sum().reset_index()
+period_80_total = period_80.groupby('営業担当者名')['金額'].sum().reset_index()
+
+# Merge the two dataframes on '営業担当者名'
+result = pd.merge(period_79_total, period_80_total, on='営業担当者名', suffixes=('_79期', '_80期'))
+
+# Calculate the year-on-year growth rate
+result['対前年比'] = (result['金額_80期'] - result['金額_79期']) / result['金額_79期'] * 100
+
+# Display the result
+result
+                        ```
+                    
+2023-08-10 08:55:25 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+df['出荷日'] = pd.to_datetime(df['出荷日'])
+period_79 = df[(df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')]
+period_80 = df[(df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')]
+period_79_total = period_79.groupby('営業担当者名')['金額'].sum().reset_index()
+period_80_total = period_80.groupby('営業担当者名')['金額'].sum().reset_index()
+result = pd.merge(period_79_total, period_80_total, on='営業担当者名', suffixes=('_79期', '_80期'))
+result['対前年比'] = (result['金額_80期'] - result['金額_79期']) / result['金額_79期'] * 100
+result
+```
+2023-08-10 08:55:25 [INFO] Answer:     営業担当者名    金額_79期    金額_80期       対前年比
+0    星川 和博  87028739  70070776 -19.485475
+1     渡辺 臣  91894563  62768227 -31.695386
+2  瀬野尾 真里子  27094878  23988662 -11.464218
+3    葛西 伸一  87561710  90554600   3.418035
+2023-08-10 08:55:25 [INFO] Executed in: 9.566735029220581s
+2023-08-10 13:08:21 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は表形式
+#条件- 得意先名は「オツタカ」を含んだ名称   
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 月毎の金額の合計
+2023-08-10 13:08:21 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:08:21 [INFO] Prompt ID: 61b5a336-1f7c-4e54-9d66-cf64fac22c6f
+2023-08-10 13:08:29 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# Filter the dataframe based on the condition
+filtered_df = df[df['得意先名'].str.contains('オツタカ')]
+
+# Convert the '受注日' column to datetime format
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+
+# Create a new column '期' based on the '受注日'
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the dataframe by '期' and '受注月', and calculate the sum of '金額'
+result = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+
+# Pivot the dataframe to get the desired format
+pivot_result = result.pivot(index='期', columns='受注月', values='金額')
+
+# Display the pivot table
+pivot_result
+                        ```
+                    
+2023-08-10 13:08:29 [INFO] 
+Code running:
+```
+filtered_df = df[df['得意先名'].str.contains('オツタカ')]
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+result = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+pivot_result = result.pivot(index='期', columns='受注月', values='金額')
+pivot_result
+```
+2023-08-10 13:08:29 [INFO] Answer: 受注月      1       2       3       4       5        6        7       8       10       11       12
+期                                                                                              
+79期  394600  185900       0       0  439450   206800   212300  292050  514250  1070500   184250
+80期  427000  821300  776050  605150  130350  1153850  1079745   24000  441600   511750  1345220
+2023-08-10 13:08:29 [INFO] Executed in: 7.747602701187134s
+2023-08-10 13:10:41 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は表形式
+#条件- 得意先名は「オツタカ」を含んだ名称   
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 月毎の金額の合計
+2023-08-10 13:10:41 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:10:41 [INFO] Prompt ID: 69dd93b1-28ae-4c0b-8e94-45b8b5c02c9b
+2023-08-10 13:10:41 [INFO] Using cached response
+2023-08-10 13:10:41 [INFO] 
+Code running:
+```
+filtered_df = df[df['得意先名'].str.contains('オツタカ')]
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+result = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+pivot_result = result.pivot(index='期', columns='受注月', values='金額')
+pivot_result
+```
+2023-08-10 13:10:41 [INFO] Answer: 受注月      1       2       3       4       5        6        7       8       10       11       12
+期                                                                                              
+79期  394600  185900       0       0  439450   206800   212300  292050  514250  1070500   184250
+80期  427000  821300  776050  605150  130350  1153850  1079745   24000  441600   511750  1345220
+2023-08-10 13:10:41 [INFO] Executed in: 0.03199958801269531s
+2023-08-10 13:25:55 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は表形式
+#条件- 得意先名は「オツタカ」を含んだ名称   
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 月毎の金額の合計
+2023-08-10 13:25:55 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:25:55 [INFO] Prompt ID: 5d2479e2-c8d9-49ac-aaa8-9d02364c30e8
+2023-08-10 13:25:55 [INFO] Using cached response
+2023-08-10 13:25:55 [INFO] 
+Code running:
+```
+filtered_df = df[df['得意先名'].str.contains('オツタカ')]
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+result = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+pivot_result = result.pivot(index='期', columns='受注月', values='金額')
+pivot_result
+```
+2023-08-10 13:25:55 [INFO] Answer: 受注月      1       2       3       4       5        6        7       8       10       11       12
+期                                                                                              
+79期  394600  185900       0       0  439450   206800   212300  292050  514250  1070500   184250
+80期  427000  821300  776050  605150  130350  1153850  1079745   24000  441600   511750  1345220
+2023-08-10 13:25:55 [INFO] Executed in: 0.03199934959411621s
+2023-08-10 13:30:04 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ   
+ #streamlit用のコードでグラフを作成してください
+#st.pyplot(fig)で表示してください
+#条件     
+- 得意先名は「オツタカ」を含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。    
+- 月毎の金額の合計
+2023-08-10 13:30:04 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:30:04 [INFO] Prompt ID: 3228cb20-1f0b-4eab-87ef-882801379bad
+2023-08-10 13:30:14 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the condition
+filtered_df = df[df['得意先名'].str.contains('オツタカ')]
+
+# Convert the '受注日' column to datetime format
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+
+# Create a new column '期' based on the '受注日'
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the dataframe by '期' and '受注月', and calculate the sum of '金額'
+grouped_df = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+
+# Create a line plot
+fig, ax = plt.subplots()
+for period in grouped_df['期'].unique():
+    data = grouped_df[grouped_df['期'] == period]
+    ax.plot(data['受注月'], data['金額'], label=period)
+
+# Set the x-axis and y-axis labels
+ax.set_xlabel('受注月')
+ax.set_ylabel('金額')
+
+# Set the title of the plot
+ax.set_title('得意先名に「オツタカ」を含む注文の月毎の金額合計')
+
+# Add a legend
+ax.legend()
+
+# Display the plot using st.pyplot()
+st.pyplot(fig)
+                        ```
+                    
+2023-08-10 13:30:14 [INFO] 
+Code running:
+```
+filtered_df = df[df['得意先名'].str.contains('オツタカ')]
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+grouped_df = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+fig, ax = plt.subplots()
+for period in grouped_df['期'].unique():
+    data = grouped_df[grouped_df['期'] == period]
+    ax.plot(data['受注月'], data['金額'], label=period)
+ax.set_xlabel('受注月')
+ax.set_ylabel('金額')
+ax.set_title('得意先名に「オツタカ」を含む注文の月毎の金額合計')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-10 13:30:15 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=10, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-10 13:30:15 [INFO] Executed in: 11.14151906967163s
+2023-08-10 13:36:37 [INFO] Question: 下記の条件を考慮して表示してください。#表示内容は折れ線グラフ    #streamlit用のコードでグラフを作成#figsize=(6,4)で表示#st.pyplot(fig)で表示#条件     - 得意先名は「オツタカ」を含む    - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。    - 月毎の金額の合計
+2023-08-10 13:36:37 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:36:37 [INFO] Prompt ID: d21be175-383f-4ac5-9702-d89425ca3a64
+2023-08-10 13:36:46 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the conditions
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+
+# Create a new column for the fiscal year
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the data by month and calculate the total amount
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+
+# Create the line plot
+fig, ax = plt.subplots(figsize=(6, 4))
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-10 13:36:46 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+fig, ax = plt.subplots(figsize=(6, 4))
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-10 13:36:46 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=10, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-10 13:36:46 [INFO] Executed in: 9.090224504470825s
+2023-08-10 13:38:28 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ    
+#streamlit用のコードでグラフを作成
+#コードplt.figure(figsize=(6,4))を使用
+#st.pyplot(fig)で表示
+#条件    
+ - 得意先名は「オツタカ」を含む   
+ - 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 月毎の金額の合計
+2023-08-10 13:38:28 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:38:28 [INFO] Prompt ID: 941bfae6-fd66-4164-b9bb-f691b1517eee
+2023-08-10 13:38:38 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the conditions
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+
+# Create a new column for the fiscal year
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the data by month and fiscal year, and calculate the sum of the amounts
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+
+# Create the line plot
+fig = plt.figure(figsize=(6, 4))
+plt.plot(df_grouped[df_grouped['Fiscal Year'] == '79期']['受注日'], df_grouped[df_grouped['Fiscal Year'] == '79期']['金額'], label='79期')
+plt.plot(df_grouped[df_grouped['Fiscal Year'] == '80期']['受注日'], df_grouped[df_grouped['Fiscal Year'] == '80期']['金額'], label='80期')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer "オツタカ"')
+plt.legend()
+
+# Display the plot in Streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-10 13:38:38 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+fig = plt.figure(figsize=(6, 4))
+plt.plot(df_grouped[df_grouped['Fiscal Year'] == '79期']['受注日'], df_grouped[df_grouped['Fiscal Year'] == '79期']['金額'], label='79期')
+plt.plot(df_grouped[df_grouped['Fiscal Year'] == '80期']['受注日'], df_grouped[df_grouped['Fiscal Year'] == '80期']['金額'], label='80期')
+plt.xlabel('Month')
+plt.ylabel('Total Amount')
+plt.title('Monthly Total Amount for Customer "オツタカ"')
+plt.legend()
+st.pyplot(fig)
+```
+2023-08-10 13:38:38 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=10, _parent_path=(), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator())
+2023-08-10 13:38:38 [INFO] Executed in: 10.38798189163208s
+2023-08-10 13:43:58 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ    
+#streamlit用のコードでグラフを作成
+#st.pyplot(fig)で表示
+#条件     
+- 得意先名は「オツタカ」を含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 月毎の金額の合計
+2023-08-10 13:43:58 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:43:58 [INFO] Prompt ID: 8995b056-ccab-4b15-8b6f-5792a03e1247
+2023-08-10 13:44:08 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the condition
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+
+# Create a new column for the fiscal year
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the data by month and fiscal year and calculate the sum of the amounts
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+
+# Create a line plot
+fig, ax = plt.subplots()
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-10 13:44:08 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+fig, ax = plt.subplots()
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-10 13:44:08 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _form_data=FormData(form_id='')))
+2023-08-10 13:44:08 [INFO] Executed in: 9.850514888763428s
+2023-08-10 13:45:42 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ    
+#streamlit用のコードでグラフを作成
+#st.pyplot(fig)で表示
+#条件     
+- 得意先名は「オツタカ」を含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 月毎の金額の合計
+2023-08-10 13:45:42 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:45:42 [INFO] Prompt ID: bff7ae3f-b307-4036-a734-722a0c246bc1
+2023-08-10 13:45:42 [INFO] Using cached response
+2023-08-10 13:45:42 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+fig, ax = plt.subplots()
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-10 13:45:43 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-10 13:45:43 [INFO] Executed in: 0.42544031143188477s
+2023-08-10 13:49:34 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ    
+#streamlit用のコードでグラフを作成
+#st.pyplot(fig)で表示
+#条件     
+- 得意先名は「オツタカ」を含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 月毎の金額の合計
+2023-08-10 13:49:34 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:49:34 [INFO] Prompt ID: 1cad262d-fc63-4f83-b2af-e81c890c5263
+2023-08-10 13:49:34 [INFO] Using cached response
+2023-08-10 13:49:34 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_grouped = df_filtered.groupby([df_filtered['受注日'].dt.month, 'Fiscal Year'])['金額'].sum().reset_index()
+df_grouped.columns = ['Month', 'Fiscal Year', 'Total Amount']
+fig, ax = plt.subplots()
+for fiscal_year in df_grouped['Fiscal Year'].unique():
+    df_fy = df_grouped[df_grouped['Fiscal Year'] == fiscal_year]
+    ax.plot(df_fy['Month'], df_fy['Total Amount'], label=fiscal_year)
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-10 13:49:35 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(10,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(10,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-10 13:49:35 [INFO] Executed in: 0.4350881576538086s
+2023-08-10 13:51:56 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ    
+#streamlit用のコードでグラフを作成
+#st.pyplot(fig)で表示#条件    
+- 得意先名は「オツタカ」を含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - ７月の金額の合計
+2023-08-10 13:51:56 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:51:56 [INFO] Prompt ID: 270505c5-0459-4a2b-9ab8-a8093b3aacb4
+2023-08-10 13:52:04 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the conditions
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+
+# Create a new column to represent the fiscal year
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Filter the dataframe for July
+df_july = df_filtered[df_filtered['受注日'].dt.month == 7]
+
+# Group by fiscal year and calculate the sum of the amounts
+df_grouped = df_july.groupby('Fiscal Year')['金額'].sum()
+
+# Create a bar plot
+fig, ax = plt.subplots()
+df_grouped.plot(kind='bar', ax=ax)
+
+# Set the labels and title
+ax.set_xlabel('Fiscal Year')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount in July')
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-10 13:52:04 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_july = df_filtered[df_filtered['受注日'].dt.month == 7]
+df_grouped = df_july.groupby('Fiscal Year')['金額'].sum()
+fig, ax = plt.subplots()
+df_grouped.plot(kind='bar', ax=ax)
+ax.set_xlabel('Fiscal Year')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount in July')
+st.pyplot(fig)
+```
+2023-08-10 13:52:04 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(10,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(10,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-10 13:52:04 [INFO] Executed in: 8.334959745407104s
+2023-08-10 13:53:24 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は棒グラフ    
+#streamlit用のコードでグラフを作成
+#st.pyplot(fig)で表示#条件    
+- 得意先名は「オツタカ」を含む    
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - ７月の金額の合計
+2023-08-10 13:53:24 [INFO] Running PandasAI with openai LLM...
+2023-08-10 13:53:24 [INFO] Prompt ID: 065a2bf4-2a88-4474-906c-7b43438b284a
+2023-08-10 13:53:24 [INFO] Using cached response
+2023-08-10 13:53:24 [INFO] 
+Code running:
+```
+df_filtered = df[df['得意先名'].str.contains('オツタカ')]
+df_filtered['受注日'] = pd.to_datetime(df_filtered['受注日'])
+df_filtered['Fiscal Year'] = pd.cut(df_filtered['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+df_july = df_filtered[df_filtered['受注日'].dt.month == 7]
+df_grouped = df_july.groupby('Fiscal Year')['金額'].sum()
+fig, ax = plt.subplots()
+df_grouped.plot(kind='bar', ax=ax)
+ax.set_xlabel('Fiscal Year')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount in July')
+st.pyplot(fig)
+```
+2023-08-10 13:53:25 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-10 13:53:25 [INFO] Executed in: 0.3187389373779297s
+2023-08-10 14:43:56 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ   
+ #streamlit用のコードでグラフを作成
+#st.pyplot(fig)で表示
+#条件  
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+ - 営業担当者名が星川を含む
+- 月毎の金額の合計
+2023-08-10 14:43:56 [INFO] Running PandasAI with openai LLM...
+2023-08-10 14:43:56 [INFO] Prompt ID: b495a4eb-a625-4fa1-bc49-4f3207c7d5c6
+2023-08-10 14:44:06 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Convert the date columns to datetime format
+df['受注日'] = pd.to_datetime(df['受注日'])
+
+# Filter the data for the specified periods and the specified salesperson
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+salesperson = df['営業担当者名'].str.contains('星川')
+
+# Group the data by month and calculate the total amount for each month
+grouped_79 = df.loc[period_79 & salesperson].groupby(df['受注日'].dt.month)['金額'].sum()
+grouped_80 = df.loc[period_80 & salesperson].groupby(df['受注日'].dt.month)['金額'].sum()
+
+# Create a line plot for the total amount by month
+fig, ax = plt.subplots()
+ax.plot(grouped_79.index, grouped_79.values, label='Period 79')
+ax.plot(grouped_80.index, grouped_80.values, label='Period 80')
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-10 14:44:06 [INFO] 
+Code running:
+```
+df['受注日'] = pd.to_datetime(df['受注日'])
+period_79 = (df['受注日'] >= '2021-10-01') & (df['受注日'] <= '2022-09-30')
+period_80 = (df['受注日'] >= '2022-10-01') & (df['受注日'] <= '2023-09-30')
+salesperson = df['営業担当者名'].str.contains('星川')
+grouped_79 = df.loc[period_79 & salesperson].groupby(df['受注日'].dt.month)['金額'].sum()
+grouped_80 = df.loc[period_80 & salesperson].groupby(df['受注日'].dt.month)['金額'].sum()
+fig, ax = plt.subplots()
+ax.plot(grouped_79.index, grouped_79.values, label='Period 79')
+ax.plot(grouped_80.index, grouped_80.values, label='Period 80')
+ax.set_xlabel('Month')
+ax.set_ylabel('Total Amount')
+ax.set_title('Total Amount by Month')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-10 14:44:06 [WARNING] Error executing code (count: 0)
+2023-08-10 14:44:37 [INFO] Question: 下記の条件を考慮して表示してください。
+#表示内容は折れ線グラフ   
+ #streamlit用のコードでグラフを作成
+#st.pyplot(fig)で表示
+#条件  
+ - 営業担当者名が星川を含む
+- 受注日の2021年10月1日から2022年9月30日までを79期とします。
+- 受注日の2022年10月1日から2023年9月30日までを80期とします。   
+- 月毎の金額の合計
+2023-08-10 14:44:37 [INFO] Running PandasAI with openai LLM...
+2023-08-10 14:44:37 [INFO] Prompt ID: bfb7b89c-cea2-4cdc-bcc2-9721f021e12f
+2023-08-10 14:44:47 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Filter the dataframe based on the condition
+filtered_df = df[df['営業担当者名'].str.contains('星川')]
+
+# Convert the '受注日' column to datetime format
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+
+# Create a new column '期' based on the '受注日'
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+
+# Group the dataframe by '期' and '受注月', and calculate the sum of '金額'
+grouped_df = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+
+# Create a line plot
+fig, ax = plt.subplots()
+for period in grouped_df['期'].unique():
+    data = grouped_df[grouped_df['期'] == period]
+    ax.plot(data['受注月'], data['金額'], label=period)
+
+# Set the x-axis and y-axis labels
+ax.set_xlabel('受注月')
+ax.set_ylabel('金額')
+
+# Set the title of the plot
+ax.set_title('営業担当者名が星川を含む月毎の金額の合計')
+
+# Add a legend
+ax.legend()
+
+# Display the plot using streamlit
+st.pyplot(fig)
+                        ```
+                    
+2023-08-10 14:44:47 [INFO] 
+Code running:
+```
+filtered_df = df[df['営業担当者名'].str.contains('星川')]
+filtered_df['受注日'] = pd.to_datetime(filtered_df['受注日'])
+filtered_df['期'] = pd.cut(filtered_df['受注日'], bins=[pd.to_datetime('2021-10-01'), pd.to_datetime('2022-09-30'), pd.to_datetime('2023-09-30')], labels=['79期', '80期'])
+grouped_df = filtered_df.groupby(['期', '受注月'])['金額'].sum().reset_index()
+fig, ax = plt.subplots()
+for period in grouped_df['期'].unique():
+    data = grouped_df[grouped_df['期'] == period]
+    ax.plot(data['受注月'], data['金額'], label=period)
+ax.set_xlabel('受注月')
+ax.set_ylabel('金額')
+ax.set_title('営業担当者名が星川を含む月毎の金額の合計')
+ax.legend()
+st.pyplot(fig)
+```
+2023-08-10 14:44:48 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-10 14:44:48 [INFO] Executed in: 10.485366821289062s

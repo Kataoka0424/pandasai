@@ -9,6 +9,7 @@ import japanize_matplotlib
 from pandasai import PandasAI 
 from pandasai.llm.openai import OpenAI
 
+st.set_page_config(page_title='pandasai', layout='centered')
 st.markdown('### pandasai')
 
 # os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
@@ -20,11 +21,15 @@ pandas_ai = PandasAI(llm)
 # matplotlib.use('TkAgg')
 # matplotlib.use('AGG')
 
+cols = [
+    '伝票番号2', '注文No', '得意先名', '受注日', '出荷日', 'シリーズ名', '商品コード2', '商品コード3',\
+    '塗色CD', '張地', '数量', '単価', '金額', '商品分類名2', 'LD分類', '出荷倉庫', '原価単価', '原価金額',\
+    '営業担当者名', '受注月', '出荷月'
+]
+
+
 @st.cache_data(ttl=datetime.timedelta(minutes=20))
 def make_data(df):
-    # df = pd.read_excel(
-    # file, sheet_name='受注委託移動在庫生産照会', \
-    #     usecols=[1, 3, 6, 8, 10, 14, 15, 16, 21, 28, 30, 31, 42, 46, 50, 51]) #index　ナンバー不要　index_col=0
 
     # *** 出荷月、受注月列の追加***
     df['伝票番号2'] = df['伝票番号'].apply(lambda x: str(x)[:-3])
@@ -57,75 +62,84 @@ def make_data(df):
 
     df = df.drop(['伝票番号', '商　品　名'], axis=1)
 
-    df = df[['伝票番号2', '注文No', '得意先名', '受注日', '出荷日', 'シリーズ名', '商品コード2', '商品コード3', \
-             '塗色CD', '張地', '数量', '単価', '金額', '商品分類名2', 'LD分類', '出荷倉庫', '原価単価', '原価金額',\
-            '営業担当者名', '受注月', '出荷月']]
+    df = df[cols]
 
     return df
 
-uploaded_file_now = st.sidebar.file_uploader('今期ファイル', type='xlsx', key='now')
-uploaded_file_last = st.sidebar.file_uploader('前期ファイル', type='xlsx', key='last')
-uploaded_file = pd.DataFrame()
+#プロンプト
+prompt_dict = {
+    'ひな形なし': '下記の条件を考慮して計算の上表示してください。#表示内容は数字#条件\
+    - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。',
+    '表: 月毎': '下記の条件を考慮して表示してください。#表示内容は表形式#条件- 得意先名は「オツタカ」を含んだ名称\
+    - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。\
+    - 月毎の金額の合計',
+    'グラフ: 月毎': '下記の条件を考慮して表示してください。#表示内容は折れ線グラフ\
+    #streamlit用のコードでグラフを作成#st.pyplot(fig)で表示#条件 \
+    - 得意先名は「オツタカ」を含む\
+    - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。\
+    - 月毎の金額の合計',
+    '棒グラフ: 得意先別の金額合計': '下記の条件を考慮して表示してください。#表示内容は棒グラフ\
+    #streamlit用のコードでグラフを作成#st.pyplot(fig)で表示#条件\
+    - 得意先名は「オツタカ」を含む\
+    - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。\
+    - ７月の金額の合計'
+    }
+
+col1, col2 = st.columns([1, 1])
+with col1:
+    with st.expander('columns', expanded=False):
+        df_cols = pd.DataFrame(cols)
+        st.table(df_cols)
+
+with col2:
+    slct_prompt = st.selectbox(
+        'select an example of prompt', 
+        prompt_dict.keys(),
+        key='selectbox'
+    )
+
+
+prompt = st.text_area(
+    'enter your prompt:', 
+    value=prompt_dict[slct_prompt]
+)
+
+
+uploaded_files = st.file_uploader('files of xlsx', type='xlsx', key='uploaded', accept_multiple_files=True)
 
 # uploaded_file は読み込んだデータフレーム
-if uploaded_file_now and uploaded_file_last:
-    df_now = pd.read_excel(
-    uploaded_file_now, sheet_name='受注委託移動在庫生産照会', \
-        usecols=[1, 3, 6, 8, 10, 14, 15, 16, 21, 28, 30, 31, 42, 46, 50, 51])
-    df_last = pd.read_excel(
-    uploaded_file_last, sheet_name='受注委託移動在庫生産照会', \
-        usecols=[1, 3, 6, 8, 10, 14, 15, 16, 21, 28, 30, 31, 42, 46, 50, 51])
-    uploaded_file = pd.concat([df_last, df_now], axis=0)
+df = pd.DataFrame()
+if st.button('start chat', key='set_files'):
+    filenames = [file.name for file in uploaded_files]
 
-elif uploaded_file_now:
-    uploaded_file =  pd.read_excel(
-    uploaded_file_now, sheet_name='受注委託移動在庫生産照会', \
-        usecols=[1, 3, 6, 8, 10, 14, 15, 16, 21, 28, 30, 31, 42, 46, 50, 51])
-    
-elif uploaded_file_last:
-    uploaded_file = pd.read_excel(
-    uploaded_file_last, sheet_name='受注委託移動在庫生産照会', \
-        usecols=[1, 3, 6, 8, 10, 14, 15, 16, 21, 28, 30, 31, 42, 46, 50, 51])
+    for filename in filenames:
+        #uploaded_files内でのindexを取得
+        filename_index = filenames.index(filename)
+        
+        df_add = pd.read_excel(
+            uploaded_files[filename_index], sheet_name='受注委託移動在庫生産照会', \
+            usecols=[1, 3, 6, 8, 10, 14, 15, 16, 21, 28, 30, 31, 42, 46, 50, 51])
+        
+        df = pd.concat([df, df_add], axis=0, join='outer')
 
-#処理の開始
-if not uploaded_file.empty:
-    df = make_data(uploaded_file)
 
-    st.write('columns')
-    st.write(df.head(1))
+    #処理の開始
 
-    st.write('exsamples of prompts')
+    df2 = make_data(df)
 
-    prompt_dict = {
-        'ひな形なし': '下記の条件を考慮して計算の上表示してください。#表示内容は数字#条件\
-        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。',
-        '表: 月毎': '下記の条件を考慮して表示してください。#表示内容は表形式#条件- 得意先名は「オツタカ」を含んだ名称\
-        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。\
-        - 月毎の金額の合計',
-        'グラフ: 月毎': '下記の条件を考慮して表示してください。#表示内容は折れ線グラフ\
-        #streamlit用のコードでグラフを作成してください#st.pyplot(fig)で表示してください#条件- \
-        - 得意先名は「オツタカ」を含む\
-        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。\
-        - 月毎の金額の合計',
-        '棒グラフ: 得意先別の金額合計': '下記の条件を考慮して表示してください。#表示内容は棒グラフ\
-        #streamlit用のコードでグラフを作成してください#st.pyplot(fig)で表示してください#条件\
-        - 得意先名は「オツタカ」を含む\
-        - 受注日の2021年10月1日から2022年9月30日までを79期とします。- 受注日の2022年10月1日から2023年9月30日までを80期とします。\
-        - ７月の金額の合計'
-          }
-    
-    slct_prompt = st.selectbox(
-        'select a example', 
-        prompt_dict.keys())
-    
-    prompt = st.text_area(
-        'enter your prpmpt:', 
-        value=prompt_dict[slct_prompt]
-        )
+    with st.expander('dataframe', expanded=False):
+        st.write(df2.head(1))
 
-    if st.button('genarate'):
-        if prompt:
-            st.write(pandas_ai.run(df, prompt=prompt))
-        else:
-            st.warning('plase enter a prompt.')
+    min_date = df2['受注日'].min()
+    max_date = df2['受注日'].max()
+    st.write(f'【dataframe length】{len(df2)} 【min_date】{min_date} 【max_date】{max_date}')
+
+
+    if prompt:
+        st.markdown('##### response')
+        with st.expander('content', expanded=True):
+            st.write(pandas_ai.run(df2, prompt=prompt))
+    else:
+        st.warning('plase enter a prompt.')
+
 
