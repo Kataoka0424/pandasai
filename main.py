@@ -128,7 +128,7 @@ if st.button('start chat', key='set_files'):
     df2 = make_data(df)
 
     with st.expander('dataframe', expanded=False):
-        st.write(df2.head(1))
+        st.write(df2.head(20))
 
     min_date = df2['受注日'].min()
     max_date = df2['受注日'].max()

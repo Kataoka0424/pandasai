@@ -4943,3 +4943,581 @@ st.pyplot(fig)
 ```
 2023-08-10 14:44:48 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
 2023-08-10 14:44:48 [INFO] Executed in: 10.485366821289062s
+2023-08-11 20:08:13 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246ABの行に絞る
+2 塗色CD列がNYの行に絞る
+3 数量の合計を出す。
+2023-08-11 20:08:13 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:08:13 [INFO] Prompt ID: 1856e0e8-1817-4fae-a725-86350c977f0b
+2023-08-11 20:08:16 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:08:16 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:08:16 [INFO] Answer: 0
+2023-08-11 20:08:16 [INFO] Executed in: 3.02040696144104s
+2023-08-11 20:09:23 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246ABの行に絞る
+2 数量の合計を出す。
+2023-08-11 20:09:23 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:09:23 [INFO] Prompt ID: e176e887-9c58-4c65-bfe5-86d4b127a4cf
+2023-08-11 20:09:25 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[df['商品コード2'] == 'SD246AB']
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:09:25 [INFO] 
+Code running:
+```
+df_filtered = df[df['商品コード2'] == 'SD246AB']
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:09:25 [INFO] Answer: 158
+2023-08-11 20:09:25 [INFO] Executed in: 2.1871113777160645s
+2023-08-11 20:10:52 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246ABの行に絞る
+2 塗色CDの値毎の数量の合計を出す。
+2023-08-11 20:10:52 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:10:52 [INFO] Prompt ID: eeee19af-977a-40c4-a2ba-a9fd3824ff2b
+2023-08-11 20:10:54 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[df['商品コード2'] == 'SD246AB']
+result = df_filtered.groupby('塗色CD')['数量'].sum()
+result
+                        ```
+                    
+2023-08-11 20:10:54 [INFO] 
+Code running:
+```
+df_filtered = df[df['商品コード2'] == 'SD246AB']
+result = df_filtered.groupby('塗色CD')['数量'].sum()
+result
+```
+2023-08-11 20:10:54 [INFO] Answer: 塗色CD
+99       2
+BK       4
+C4       6
+N5      11
+NY      43
+OU      16
+UW      65
+WD       1
+WO      10
+Name: 数量, dtype: int64
+2023-08-11 20:10:54 [INFO] Executed in: 2.0873219966888428s
+2023-08-11 20:11:51 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246ABで 塗色CDがNYの行に絞る
+2 数量の合計を出す。
+2023-08-11 20:11:51 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:11:51 [INFO] Prompt ID: 074f1155-a537-4f5a-b6b0-6cf0604aeca2
+2023-08-11 20:11:54 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:11:54 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:11:54 [INFO] Answer: 0
+2023-08-11 20:11:54 [INFO] Executed in: 2.943207025527954s
+2023-08-11 20:12:25 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246ABで 塗色CDがNYの行に絞り数量の合計を出す。
+2023-08-11 20:12:25 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:12:25 [INFO] Prompt ID: fec364d2-cd39-493b-8728-76da0158b1cd
+2023-08-11 20:12:27 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:12:28 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:12:28 [INFO] Answer: 0
+2023-08-11 20:12:28 [INFO] Executed in: 2.672889232635498s
+2023-08-11 20:13:50 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246AB
+2 塗色CDの値毎の数量の合計を出す。
+2023-08-11 20:13:50 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:13:50 [INFO] Prompt ID: be559819-125f-4bd5-9c0e-74933f3fff2c
+2023-08-11 20:13:53 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[df['商品コード2'] == 'SD246AB']
+result = df_filtered.groupby('塗色CD')['数量'].sum()
+result
+                        ```
+                    
+2023-08-11 20:13:53 [INFO] 
+Code running:
+```
+df_filtered = df[df['商品コード2'] == 'SD246AB']
+result = df_filtered.groupby('塗色CD')['数量'].sum()
+result
+```
+2023-08-11 20:13:53 [INFO] Answer: 塗色CD
+99       2
+BK       4
+C4       6
+N5      11
+NY      43
+OU      16
+UW      65
+WD       1
+WO      10
+Name: 数量, dtype: int64
+2023-08-11 20:13:53 [INFO] Executed in: 3.9455783367156982s
+2023-08-11 20:15:08 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246AB
+2 塗色CDの値毎の数量の合計を出す。
+3 streamlitのコードで棒グラフを作成
+4 st.pyplot(fig)で表示
+2023-08-11 20:15:08 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:15:08 [INFO] Prompt ID: 350a348a-3071-4d81-845c-cf6678f2a103
+2023-08-11 20:15:16 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Filter rows where 商品コード2 is 'SD246AB'
+filtered_df = df[df['商品コード2'] == 'SD246AB']
+
+# Group by 塗色CD and calculate the sum of 数量
+grouped_df = filtered_df.groupby('塗色CD')['数量'].sum().reset_index()
+
+# Create a bar plot using streamlit
+fig, ax = plt.subplots()
+ax.bar(grouped_df['塗色CD'], grouped_df['数量'])
+plt.xlabel('塗色CD')
+plt.ylabel('数量')
+plt.title('数量の合計')
+plt.xticks(rotation=45)
+
+# Display the plot using st.pyplot
+st.pyplot(fig)
+                        ```
+                    
+2023-08-11 20:15:17 [INFO] 
+Code running:
+```
+filtered_df = df[df['商品コード2'] == 'SD246AB']
+grouped_df = filtered_df.groupby('塗色CD')['数量'].sum().reset_index()
+fig, ax = plt.subplots()
+ax.bar(grouped_df['塗色CD'], grouped_df['数量'])
+plt.xlabel('塗色CD')
+plt.ylabel('数量')
+plt.title('数量の合計')
+plt.xticks(rotation=45)
+st.pyplot(fig)
+```
+2023-08-11 20:15:18 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-11 20:15:18 [INFO] Executed in: 9.199982404708862s
+2023-08-11 20:16:26 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246AB
+2 塗色CDがNYの時の張地の値毎の数量の合計を出す。
+3 streamlitのコードで棒グラフを作成
+4 st.pyplot(fig)で表示
+2023-08-11 20:16:26 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:16:26 [INFO] Prompt ID: e97e3393-4a5d-4147-b16e-aab4bde06d84
+2023-08-11 20:16:34 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Filter the dataframe based on condition 1
+filtered_df = df[df['商品コード2'] == 'SD246AB']
+
+# Filter the dataframe based on condition 2
+filtered_df = filtered_df[filtered_df['塗色CD'] == 'NY']
+
+# Group by 張地 and calculate the sum of 数量
+grouped_df = filtered_df.groupby('張地')['数量'].sum().reset_index()
+
+# Create a bar plot using streamlit
+fig, ax = plt.subplots()
+ax.bar(grouped_df['張地'], grouped_df['数量'])
+plt.xticks(rotation=90)
+plt.xlabel('張地')
+plt.ylabel('数量')
+plt.title('張地ごとの数量合計')
+
+# Display the plot using st.pyplot
+st.pyplot(fig)
+                        ```
+                    
+2023-08-11 20:16:34 [INFO] 
+Code running:
+```
+filtered_df = df[df['商品コード2'] == 'SD246AB']
+filtered_df = filtered_df[filtered_df['塗色CD'] == 'NY']
+grouped_df = filtered_df.groupby('張地')['数量'].sum().reset_index()
+fig, ax = plt.subplots()
+ax.bar(grouped_df['張地'], grouped_df['数量'])
+plt.xticks(rotation=90)
+plt.xlabel('張地')
+plt.ylabel('数量')
+plt.title('張地ごとの数量合計')
+st.pyplot(fig)
+```
+2023-08-11 20:16:34 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-11 20:16:34 [INFO] Executed in: 8.712125539779663s
+2023-08-11 20:17:14 [INFO] Question: 下記の手順で処理してください。
+#手順
+1 商品コード2列がSD246AB
+2 塗色CDがNYの時の張地列の値毎の数量の合計を出す。
+3 streamlitのコードで棒グラフを作成
+4 st.pyplot(fig)で表示
+2023-08-11 20:17:14 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:17:14 [INFO] Prompt ID: 14d7f646-8928-42c4-82ad-9ee3ae5d022f
+2023-08-11 20:17:19 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Filter rows where 商品コード2 is SD246AB and 塗色CD is NY
+filtered_df = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+
+# Group by 張地 and calculate the sum of 数量
+grouped_df = filtered_df.groupby('張地')['数量'].sum().reset_index()
+
+# Create a bar plot using streamlit
+fig, ax = plt.subplots()
+ax.bar(grouped_df['張地'], grouped_df['数量'])
+plt.xticks(rotation=90)
+plt.xlabel('張地')
+plt.ylabel('数量')
+plt.title('数量の合計')
+st.pyplot(fig)
+                        ```
+                    
+2023-08-11 20:17:19 [INFO] 
+Code running:
+```
+filtered_df = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+grouped_df = filtered_df.groupby('張地')['数量'].sum().reset_index()
+fig, ax = plt.subplots()
+ax.bar(grouped_df['張地'], grouped_df['数量'])
+plt.xticks(rotation=90)
+plt.xlabel('張地')
+plt.ylabel('数量')
+plt.title('数量の合計')
+st.pyplot(fig)
+```
+2023-08-11 20:17:19 [INFO] Answer: DeltaGenerator(_provided_cursor=LockedCursor(_index=1, _parent_path=(9,), _props={'delta_type': 'imgs', 'last_index': None}), _parent=DeltaGenerator(_provided_cursor=RunningCursor(_parent_path=(9,), _index=2), _parent=DeltaGenerator(), _block_type='expandable', _form_data=FormData(form_id='')))
+2023-08-11 20:17:19 [INFO] Executed in: 5.737237930297852s
+2023-08-11 20:22:26 [INFO] Question: what customer is the highest total 金額?
+2023-08-11 20:22:26 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:22:26 [INFO] Prompt ID: a2f4c51f-39aa-419d-a0a4-670c12e204a8
+2023-08-11 20:25:08 [INFO] Question: 商品コード2がSD246AB
+塗色がNY
+数量の合計
+2023-08-11 20:25:08 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:25:08 [INFO] Prompt ID: 4bc85bda-2247-483e-b4ab-15ccaffafb56
+2023-08-11 20:25:12 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:25:12 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:25:12 [INFO] Answer: 0
+2023-08-11 20:25:12 [INFO] Executed in: 4.2335896492004395s
+2023-08-11 20:25:29 [INFO] Question: 商品コード2がSD246AB
+塗色CDがUW
+数量の合計
+2023-08-11 20:25:29 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:25:29 [INFO] Prompt ID: fe59881e-392c-4475-86c0-9f5f4e7d73a0
+2023-08-11 20:25:32 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'UW')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:25:32 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'UW')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:25:32 [INFO] Answer: 0
+2023-08-11 20:25:32 [INFO] Executed in: 2.8728246688842773s
+2023-08-11 20:28:34 [INFO] Question: 下記の条件に合わせてdataframeを抽出して、処理に従ってください
+#条件
+商品コード2がSD246AB
+塗色CDがUW
+#処理
+条件を満たした上で数量を合計
+2023-08-11 20:28:34 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:28:34 [INFO] Prompt ID: d276deb4-cf10-4589-840c-0117c89d0930
+2023-08-11 20:28:36 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'UW')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:28:36 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'UW')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:28:36 [INFO] Answer: 0
+2023-08-11 20:28:36 [INFO] Executed in: 2.280116558074951s
+2023-08-11 20:28:46 [INFO] Question: 下記の条件に合わせてdataframeを抽出して、処理に従ってください
+#条件
+商品コード2がSD246AB
+塗色CDがUW
+#処理
+数量を合計
+2023-08-11 20:28:46 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:28:46 [INFO] Prompt ID: 5866633a-824c-4797-b95d-b70f5171e4bb
+2023-08-11 20:28:49 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'UW')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:28:49 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'UW')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:28:49 [INFO] Answer: 0
+2023-08-11 20:28:49 [INFO] Executed in: 2.9321513175964355s
+2023-08-11 20:29:23 [INFO] Question: #条件
+商品コード2がSD246AB
+塗色CDがUW
+#処理
+dataframeを表示
+2023-08-11 20:29:23 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:29:23 [INFO] Prompt ID: 7cae8e81-91e9-4ec3-8f86-9f20b4364bf1
+2023-08-11 20:30:45 [INFO] Question: #条件
+商品コード2がSD246AB
+塗色CDの値毎に数量を合計し表を作成
+2023-08-11 20:30:45 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:30:45 [INFO] Prompt ID: cf21fe92-8341-42cb-9ec4-7a06173c8319
+2023-08-11 20:30:49 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# Create a new dataframe with the required columns
+df_filtered = df[df['商品コード2'] == 'SD246AB'][['塗色CD', '数量']]
+
+# Group by 塗色CD and sum the quantities
+df_grouped = df_filtered.groupby('塗色CD').sum()
+
+# Reset the index to make 塗色CD a column
+df_grouped.reset_index(inplace=True)
+
+# Print the resulting dataframe
+print(df_grouped)
+                        ```
+                    
+2023-08-11 20:30:49 [INFO] 
+Code running:
+```
+df_filtered = df[df['商品コード2'] == 'SD246AB'][['塗色CD', '数量']]
+df_grouped = df_filtered.groupby('塗色CD').sum()
+df_grouped.reset_index(inplace=True)
+print(df_grouped)
+```
+2023-08-11 20:30:49 [INFO] Answer:    塗色CD  数量
+0  99     2
+1  BK     4
+2  C4     6
+3  N5    11
+4  NY    43
+5  OU    16
+6  UW    65
+7  WD     1
+8  WO    10
+2023-08-11 20:30:49 [INFO] Executed in: 4.46079158782959s
+2023-08-11 20:31:55 [INFO] Question: #条件
+商品コード2がSD246AB
+張地の値毎に数量を合計し表を作成
+2023-08-11 20:31:55 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:31:55 [INFO] Prompt ID: db7f49df-f6a9-44fc-a9ed-689d41ee6166
+2023-08-11 20:31:59 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# Filter the dataframe based on the condition
+filtered_df = df[df['商品コード2'] == 'SD246AB']
+
+# Group the filtered dataframe by 張地 and calculate the sum of 数量
+result = filtered_df.groupby('張地')['数量'].sum().reset_index()
+
+# Print the result
+print(result)
+                        ```
+                    
+2023-08-11 20:31:59 [INFO] 
+Code running:
+```
+filtered_df = df[df['商品コード2'] == 'SD246AB']
+result = filtered_df.groupby('張地')['数量'].sum().reset_index()
+print(result)
+```
+2023-08-11 20:31:59 [INFO] Answer:            張地  数量
+0               1
+1        低座椅子   1
+2         支給布   1
+3      ｱﾗﾝLGR   2
+4     ｶﾞｳﾁｮGR   1
+5       ｸﾚｵBE   2
+6       ｸﾚｵBR   6
+7     ｻﾌｨﾛｽBR   6
+8    ｻﾌｨﾛｽLGR   1
+9      ｼｬｰﾑBE   1
+10     ｼｬｰﾑBR   7
+11     ｼｬｰﾑGR   5
+12   ｽﾋﾟﾘｯﾄBE   1
+13   ｽﾋﾟﾘｯﾄBR   1
+14   ｽﾋﾟﾘｯﾄGR   2
+15   ｽﾋﾟﾘｯﾄPU   1
+16    ｾｲﾌﾞﾙBE   1
+17     ｿ-ﾎ-32   1
+18     ｿ-ﾎ-54   2
+19     ｿ-ﾎ-67   1
+20     ｿ-ﾎ-81   1
+21     ﾄﾚﾝﾄBE   2
+22     ﾄﾚﾝﾄBU   4
+23    ﾄﾚﾝﾄLGR   1
+24      ﾄﾞｯｸB   3
+25     ﾄﾞｯｸBR  25
+26     ﾄﾞｯｸPU   1
+27     ﾄﾞｯｸRE   9
+28     ﾄﾞｯｸYG  11
+29      ﾅｷﾞDG   1
+30  ﾊｲﾗﾙｺﾞDBR   2
+31    ﾊﾟﾚｯﾄGY   1
+32    ﾌﾞﾙｰﾑBU   2
+33     ﾌﾞﾙｰﾑG   1
+34    ﾌﾟﾗﾊDBR   4
+35     ﾌﾟﾗﾊGR   5
+36   ﾍﾞｶﾞｽDGR   2
+37    ﾍﾞｶﾞｽGR   3
+38    ﾍﾞｶﾞｽRE   3
+39      ﾏｲｶBE   0
+40     ﾙｰﾁｪBR  28
+41     ﾙｰﾁｪPU   4
+42     ﾙｰﾁｪYG   1
+2023-08-11 20:31:59 [INFO] Executed in: 3.60725474357605s
+2023-08-11 20:33:02 [INFO] Question: #条件
+商品コード2がSD246AB
+塗色CDがNYの数量
+2023-08-11 20:33:02 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:33:02 [INFO] Prompt ID: 10f7d375-e1c8-47a1-bca2-2f22dfb1c02d
+2023-08-11 20:33:59 [INFO] Question: #条件
+商品コード2がSD246AB
+塗色CDがNYの数量
+2023-08-11 20:33:59 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:33:59 [INFO] Prompt ID: b7643d90-5002-4f70-bc6c-f6ff7f152cad
+2023-08-11 20:34:02 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+df_filtered['数量']
+                        ```
+                    
+2023-08-11 20:34:02 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+df_filtered['数量']
+```
+2023-08-11 20:34:02 [INFO] Answer: Series([], Name: 数量, dtype: int64)
+2023-08-11 20:34:02 [INFO] Executed in: 2.444340229034424s
+2023-08-11 20:34:46 [INFO] Question: #条件
+商品コード2がSD246AB
+塗色CDがNYの時の数量を集計
+2023-08-11 20:34:46 [INFO] Running PandasAI with openai LLM...
+2023-08-11 20:34:46 [INFO] Prompt ID: e62a4155-9b19-4c10-9e82-62ec67482396
+2023-08-11 20:34:48 [INFO] 
+                        Code generated:
+                        ```
+                        df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+                        ```
+                    
+2023-08-11 20:34:48 [INFO] 
+Code running:
+```
+df_filtered = df[(df['商品コード2'] == 'SD246AB') & (df['塗色CD'] == 'NY')]
+total_quantity = df_filtered['数量'].sum()
+total_quantity
+```
+2023-08-11 20:34:48 [INFO] Answer: 0
+2023-08-11 20:34:48 [INFO] Executed in: 2.2806918621063232s
