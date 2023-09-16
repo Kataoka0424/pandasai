@@ -5521,3 +5521,511 @@ total_quantity
 ```
 2023-08-11 20:34:48 [INFO] Answer: 0
 2023-08-11 20:34:48 [INFO] Executed in: 2.2806918621063232s
+2023-09-16 14:07:45 [INFO] Question: àÍî‘îÑÇÍÇƒÇ¢ÇÈè§ïiÇÕÅH
+2023-09-16 14:07:45 [INFO] Running PandasAI with openai LLM...
+2023-09-16 14:07:45 [INFO] Prompt ID: c39fa481-42e1-45f7-a084-dfb33713e690
+2023-09-16 14:07:56 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    # Process: Grouping the data by 'è§ïiñº' and summing the 'êîó ' column
+    grouped_data = dfs[0].groupby('è§ïiñº')['êîó '].sum()
+    
+    # Process: Finding the product with the highest sales
+    best_selling_product = grouped_data.idxmax()
+    
+    # Output: Returning the best selling product
+    return {"type": "text", "value": f"The best selling product is {best_selling_product}."}
+```
+
+2023-09-16 14:07:56 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    grouped_data = dfs[0].groupby('è§ïiñº')['êîó '].sum()
+    best_selling_product = grouped_data.idxmax()
+    return {'type': 'text', 'value': f'The best selling product is {best_selling_product}.'}
+        ```
+2023-09-16 14:07:56 [INFO] Answer: {'type': 'text', 'value': 'The best selling product is VCORE.'}
+2023-09-16 14:07:56 [INFO] Executed in: 10.12106728553772s
+2023-09-16 14:08:24 [INFO] Question: åéï ìXï‹ï è§ïiï Ç…êîó Ç∆îÑè„ÇèoÇµÇƒ
+2023-09-16 14:08:24 [INFO] Running PandasAI with openai LLM...
+2023-09-16 14:08:24 [INFO] Prompt ID: 0a24394c-698e-4c91-8398-43ea73a0f392
+2023-09-16 14:08:34 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    # Prepare
+    df = dfs[0].copy()
+    df['ì˙ït'] = pd.to_datetime(df['ì˙ït'])
+    
+    # Process
+    df['îNåé'] = df['ì˙ït'].dt.to_period('M')
+    result = df.groupby(['îNåé', 'ìXï‹ñº', 'è§ïiñº']).agg({'êîó ': 'sum', 'ã‡äz': 'sum'}).reset_index()
+    
+    # Analyze
+    output = result[['îNåé', 'ìXï‹ñº', 'è§ïiñº', 'êîó ', 'ã‡äz']]
+    
+    # Output
+    return {"type": "dataframe", "value": output}
+```
+
+2023-09-16 14:08:34 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    df = dfs[0].copy()
+    df['ì˙ït'] = pd.to_datetime(df['ì˙ït'])
+    df['îNåé'] = df['ì˙ït'].dt.to_period('M')
+    result = df.groupby(['îNåé', 'ìXï‹ñº', 'è§ïiñº']).agg({'êîó ': 'sum', 'ã‡äz': 'sum'}).reset_index()
+    output = result[['îNåé', 'ìXï‹ñº', 'è§ïiñº', 'êîó ', 'ã‡äz']]
+    return {'type': 'dataframe', 'value': output}
+        ```
+2023-09-16 14:08:34 [INFO] Answer: {'type': 'dataframe', 'value':          îNåé   ìXï‹ñº        è§ïiñº   êîó       ã‡äz
+0   2023-01  ñºå√âÆìX      BEAST   70  126000
+1   2023-01  ñºå√âÆìX  PUREDRIVE  105  262500
+2   2023-01  ñºå√âÆìX      VCORE  148  473600
+3   2023-01   ëÂç„ìX      BEAST   86  154800
+4   2023-01   ëÂç„ìX  PUREDRIVE  142  355000
+5   2023-01   ëÂç„ìX      VCORE  172  550400
+6   2023-01   êVèhìX      BEAST   72  129600
+7   2023-01   êVèhìX  PUREDRIVE   89  222500
+8   2023-01   êVèhìX      VCORE  210  672000
+9   2023-01   éDñyìX      BEAST   14   25200
+10  2023-01   éDñyìX  PUREDRIVE   75  187500
+11  2023-01   éDñyìX      VCORE  126  403200
+12  2023-02  ñºå√âÆìX      BEAST  112  201600
+13  2023-02  ñºå√âÆìX  PUREDRIVE  112  280000
+14  2023-02  ñºå√âÆìX      VCORE  125  400000
+15  2023-02   ëÂç„ìX      BEAST   68  122400
+16  2023-02   ëÂç„ìX  PUREDRIVE   54  135000
+17  2023-02   ëÂç„ìX      VCORE  130  416000
+18  2023-02   êVèhìX      BEAST   89  160200
+19  2023-02   êVèhìX  PUREDRIVE  179  447500
+20  2023-02   êVèhìX      VCORE  138  441600
+21  2023-02   éDñyìX      BEAST   11   19800
+22  2023-02   éDñyìX  PUREDRIVE   74  185000
+23  2023-02   éDñyìX      VCORE  190  608000}
+2023-09-16 14:08:34 [INFO] Executed in: 10.340242147445679s
+2023-09-16 14:09:38 [INFO] Question: â∫ãLÇÃÉOÉâÉtÇçÏÇ¡Çƒ
+ÅEÉâÉPÉbÉgï ÇÃîÑè„
+ÅEÉâÉPÉbÉgï Ç…îÑè„ÇÃêîílÇï\é¶
+2023-09-16 14:09:38 [INFO] Running PandasAI with openai LLM...
+2023-09-16 14:09:38 [INFO] Prompt ID: c440a586-1eef-4d5c-a97e-f294c3f733e2
+2023-09-16 14:09:50 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    # Prepare
+    df = dfs[0].copy()
+    
+    # Process
+    racket_sales = df.groupby('è§ïiñº')['ã‡äz'].sum().reset_index()
+    
+    # Analyze
+    fig, ax = plt.subplots()
+    racket_sales.plot(x='è§ïiñº', y='ã‡äz', kind='bar', ax=ax)
+    ax.set_xlabel('ÉâÉPÉbÉg')
+    ax.set_ylabel('îÑè„')
+    ax.set_title('ÉâÉPÉbÉgï ÇÃîÑè„')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close(fig)
+    
+    # Output
+    output = {
+        "type": "plot",
+        "value": "exports/charts/temp_chart.png"
+    }
+    return output
+```
+
+2023-09-16 14:09:50 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    df = dfs[0].copy()
+    racket_sales = df.groupby('è§ïiñº')['ã‡äz'].sum().reset_index()
+    fig, ax = plt.subplots()
+    racket_sales.plot(x='è§ïiñº', y='ã‡äz', kind='bar', ax=ax)
+    ax.set_xlabel('ÉâÉPÉbÉg')
+    ax.set_ylabel('îÑè„')
+    ax.set_title('ÉâÉPÉbÉgï ÇÃîÑè„')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close(fig)
+    output = {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+    return output
+        ```
+2023-09-16 14:09:51 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-09-16 14:09:51 [INFO] Executed in: 13.01725721359253s
+2023-09-16 14:10:24 [INFO] Question: â∫ãLÇÃÉOÉâÉtÇçÏÇ¡Çƒ
+ÅEÉâÉPÉbÉgï ÇÃîÑè„
+ÅEÉâÉPÉbÉgï Ç…ã‡äzÇï\é¶
+2023-09-16 14:10:24 [INFO] Running PandasAI with openai LLM...
+2023-09-16 14:10:24 [INFO] Prompt ID: 3fe5a248-5aef-4dc8-9214-bccec2d54052
+2023-09-16 14:10:36 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    # Prepare
+    df = dfs[0].copy()
+    
+    # Process
+    racket_sales = df.groupby('è§ïiñº')['êîó '].sum()
+    racket_revenue = df.groupby('è§ïiñº')['ã‡äz'].sum()
+    
+    # Analyze
+    fig, ax = plt.subplots(figsize=(8, 6))
+    racket_sales.plot(kind='bar', ax=ax)
+    ax.set_xlabel('Racket')
+    ax.set_ylabel('Sales Quantity')
+    ax.set_title('Racket Sales')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close(fig)
+    
+    # Output
+    return {
+        "type": "plot",
+        "value": "exports/charts/temp_chart.png"
+    }
+```
+
+2023-09-16 14:10:36 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    df = dfs[0].copy()
+    racket_sales = df.groupby('è§ïiñº')['êîó '].sum()
+    racket_revenue = df.groupby('è§ïiñº')['ã‡äz'].sum()
+    fig, ax = plt.subplots(figsize=(8, 6))
+    racket_sales.plot(kind='bar', ax=ax)
+    ax.set_xlabel('Racket')
+    ax.set_ylabel('Sales Quantity')
+    ax.set_title('Racket Sales')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close(fig)
+    return {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+        ```
+2023-09-16 14:10:36 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-09-16 14:10:36 [INFO] Executed in: 11.814441919326782s
+2023-09-16 14:11:18 [INFO] Question: â∫ãLÇÃÉOÉâÉtÇçÏÇ¡Çƒ
+ÅEÉâÉPÉbÉgï ÇÃîÑè„
+ÅEÉâÉPÉbÉgï Ç…ÉOÉâÉtè„Ç…ã‡äzÇï\é¶
+2023-09-16 14:11:18 [INFO] Running PandasAI with openai LLM...
+2023-09-16 14:11:18 [INFO] Prompt ID: 14bf25dd-482a-4062-8f91-d510af5ed9d0
+2023-09-16 14:11:33 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+
+    # Prepare: No preprocessing or cleaning required
+
+    # Process: Grouping by racket and calculating total sales
+    df = dfs[0]
+    sales_by_racket = df.groupby('è§ïiñº')['ã‡äz'].sum().reset_index()
+
+    # Analyze: Creating the plot
+    plt.figure(figsize=(10, 6))
+    plt.bar(sales_by_racket['è§ïiñº'], sales_by_racket['ã‡äz'])
+    plt.xlabel('ÉâÉPÉbÉg')
+    plt.ylabel('îÑè„')
+    plt.title('ÉâÉPÉbÉgï ÇÃîÑè„')
+
+    # Adding labels to the bars
+    for i, v in enumerate(sales_by_racket['ã‡äz']):
+        plt.text(i, v, str(v), ha='center', va='bottom')
+
+    # Saving the plot to a file
+    plot_path = 'exports/charts/temp_chart.png'
+    plt.savefig(plot_path)
+    plt.close()
+
+    # Output: Returning the path of the plot
+    return {"type": "plot", "value": plot_path}
+```
+
+2023-09-16 14:11:33 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    df = dfs[0]
+    sales_by_racket = df.groupby('è§ïiñº')['ã‡äz'].sum().reset_index()
+    plt.figure(figsize=(10, 6))
+    plt.bar(sales_by_racket['è§ïiñº'], sales_by_racket['ã‡äz'])
+    plt.xlabel('ÉâÉPÉbÉg')
+    plt.ylabel('îÑè„')
+    plt.title('ÉâÉPÉbÉgï ÇÃîÑè„')
+    for i, v in enumerate(sales_by_racket['ã‡äz']):
+        plt.text(i, v, str(v), ha='center', va='bottom')
+    plot_path = 'exports/charts/temp_chart.png'
+    plt.savefig(plot_path)
+    plt.close()
+    return {'type': 'plot', 'value': plot_path}
+        ```
+2023-09-16 14:11:33 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-09-16 14:11:33 [INFO] Executed in: 14.280212640762329s
+2023-09-16 14:12:05 [INFO] Question: â∫ãLÇÃÉOÉâÉtÇçÏÇ¡Çƒ
+ÅEÉâÉPÉbÉgï ÇÃîÑè„
+ÅEÉâÉPÉbÉgï ÇÃç\ê¨î‰Çâ~ÉOÉâÉtÇ≈
+2023-09-16 14:12:05 [INFO] Running PandasAI with openai LLM...
+2023-09-16 14:12:05 [INFO] Prompt ID: 5a03481e-d1ca-4d7a-a2fc-188f1e1644a8
+2023-09-16 14:12:17 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    # Prepare
+    df = dfs[0].copy()
+    
+    # Process
+    racket_sales = df.groupby('è§ïiñº')['ã‡äz'].sum()
+    total_sales = racket_sales.sum()
+    racket_sales_percentage = racket_sales / total_sales * 100
+    
+    # Analyze
+    # Bar chart of racket sales
+    racket_sales.plot(kind='bar')
+    plt.xlabel('Racket')
+    plt.ylabel('Sales')
+    plt.title('Racket Sales')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close()
+    
+    # Pie chart of racket sales percentage
+    racket_sales_percentage.plot(kind='pie', autopct='%1.1f%%')
+    plt.ylabel('')
+    plt.title('Racket Sales Percentage')
+    plt.savefig('exports/charts/temp_chart2.png')
+    plt.close()
+    
+    # Output
+    output = {
+        "type": "plot",
+        "value": "exports/charts/temp_chart.png"
+    }
+    
+    return output
+```
+
+2023-09-16 14:12:17 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    df = dfs[0].copy()
+    racket_sales = df.groupby('è§ïiñº')['ã‡äz'].sum()
+    total_sales = racket_sales.sum()
+    racket_sales_percentage = racket_sales / total_sales * 100
+    racket_sales.plot(kind='bar')
+    plt.xlabel('Racket')
+    plt.ylabel('Sales')
+    plt.title('Racket Sales')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close()
+    racket_sales_percentage.plot(kind='pie', autopct='%1.1f%%')
+    plt.ylabel('')
+    plt.title('Racket Sales Percentage')
+    plt.savefig('exports/charts/temp_chart2.png')
+    plt.close()
+    output = {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+    return output
+        ```
+2023-09-16 14:12:18 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-09-16 14:12:18 [INFO] Executed in: 12.754414558410645s
+2023-09-16 14:13:02 [INFO] Question: â∫ãLÇÃÉOÉâÉtÇçÏÇ¡Çƒ
+ÅEÉâÉPÉbÉgï ÇÃîÑè„ç\ê¨î‰Çâ~ÉOÉâÉtÇ≈
+2023-09-16 14:13:02 [INFO] Running PandasAI with openai LLM...
+2023-09-16 14:13:02 [INFO] Prompt ID: 4a58c9db-0aef-4bf0-a11e-e9799b1c98d0
+2023-09-16 14:13:15 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+
+    # Prepare: No preprocessing or cleaning required
+
+    # Process: Grouping the data by 'è§ïiñº' and calculating the sum of 'ã‡äz'
+    grouped_data = dfs[0].groupby('è§ïiñº')['ã‡äz'].sum()
+
+    # Analyze: Creating a pie chart of the sales composition by racket type
+    fig, ax = plt.subplots()
+    ax.pie(grouped_data, labels=grouped_data.index, autopct='%1.1f%%')
+    ax.set_title('Sales Composition by Racket Type')
+
+    # Save the chart to an image file
+    chart_path = 'exports/charts/temp_chart.png'
+    plt.savefig(chart_path)
+
+    # Output: Return the path of the chart image
+    return {"type": "plot", "value": chart_path}
+```
+
+2023-09-16 14:13:15 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    4. Output: return a dictionary of:
+    - type (possible values "text", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+    """
+    grouped_data = dfs[0].groupby('è§ïiñº')['ã‡äz'].sum()
+    fig, ax = plt.subplots()
+    ax.pie(grouped_data, labels=grouped_data.index, autopct='%1.1f%%')
+    ax.set_title('Sales Composition by Racket Type')
+    chart_path = 'exports/charts/temp_chart.png'
+    plt.savefig(chart_path)
+    return {'type': 'plot', 'value': chart_path}
+        ```
+2023-09-16 14:13:15 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-09-16 14:13:15 [INFO] Executed in: 13.074701309204102s
